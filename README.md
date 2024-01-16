@@ -1,2 +1,2 @@
-# trading-simulator
+## Trading Simulator
 Trading Simulator And Analyzer
