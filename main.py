@@ -81,7 +81,7 @@ times.append((etime-stime)*10000)
 
 
 plt.scatter(times,sizes)
-plt.title('Differrent data types')
+plt.title('Differrent file types')
 plt.xlabel('time to create files(10-4 s)')
 plt.ylabel('size of file(bytes)')
 plt.tight_layout()
