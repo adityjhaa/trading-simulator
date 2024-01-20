@@ -1,0 +1,3 @@
+pandas
+jugaad-data
+pyarrow
