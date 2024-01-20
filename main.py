@@ -5,8 +5,9 @@ import os
 import time
 import sys
 import pandas
+import numpy as np
 from matplotlib import pyplot as plt
-
+import matplotlib.cm as cm
 
 symbol = sys.argv[1]
 x=int(sys.argv[2])
@@ -20,6 +21,7 @@ columns = ['DATE', 'OPEN', 'CLOSE', 'HIGH','LOW', 'LTP', 'VOLUME', 'VALUE', 'NO 
 df = df.loc[:,columns]
 sizes=[]
 times=[]
+
 
 file=t+".csv"
 stime = time.time()
@@ -77,12 +79,15 @@ etime = time.time()
 sizes.append(os.path.getsize(file))
 times.append((etime-stime)*10000)
 
+files = ["csv", "json", "html", "tex", "txt", "parquet", "orc", "feather"]
+colors = ['red', 'yellow', 'brown', 'green', 'black', 'blue', 'orange', 'purple']
+
+for i in range(len(files)):
+    plt.scatter(times[i],sizes[i],c=colors[i], label=files[i])
 
 
-
-plt.scatter(times,sizes)
 plt.title('Differrent file types')
 plt.xlabel('time to create files(10-4 s)')
 plt.ylabel('size of file(bytes)')
-plt.tight_layout()
-plt.show()
+plt.legend()
+plt.savefig(t+'.png')
