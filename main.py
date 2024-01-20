@@ -5,6 +5,8 @@ import os
 import time
 import sys
 import pandas
+from matplotlib import pyplot as plt
+
 
 symbol = sys.argv[1]
 x=int(sys.argv[2])
@@ -21,7 +23,7 @@ times=[]
 
 file=t+".csv"
 stime = time.time()
-df.to_csv(file)
+df.to_csv(file, index=False)
 etime = time.time() 
 sizes.append(os.path.getsize(file))
 times.append((etime-stime)*10000)
@@ -76,6 +78,11 @@ sizes.append(os.path.getsize(file))
 times.append((etime-stime)*10000)
 
 
-print(sizes)
-print(times)
 
+
+plt.scatter(times,sizes)
+plt.title('Differrent data types')
+plt.xlabel('time to create files(10-4 s)')
+plt.ylabel('size of file(bytes)')
+plt.tight_layout()
+plt.show()
