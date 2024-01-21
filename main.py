@@ -5,7 +5,6 @@ import os
 import time
 import sys
 import pandas
-import numpy as np
 from matplotlib import pyplot as plt
 import matplotlib.cm as cm
 
