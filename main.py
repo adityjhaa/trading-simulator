@@ -73,7 +73,7 @@ sizes.append(os.path.getsize(file))
 times.append((etime-stime)*10000)
 
 files = ["csv", "json", "html", "txt", "parquet", "orc", "feather"]
-colors = ['red', 'yellow', 'brown', 'green', 'black', 'blue', 'orange']
+colors = ['red', 'purple', 'brown', 'green', 'black', 'blue', 'orange']
 
 for i in range(len(files)):
     plt.scatter(times[i],sizes[i],c=colors[i], label=files[i])
@@ -84,3 +84,4 @@ plt.xlabel('time to create files(10-4 s)')
 plt.ylabel('size of file(bytes)')
 plt.legend()
 plt.savefig(t+'.png')
+
