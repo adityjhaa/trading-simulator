@@ -13,7 +13,7 @@ symbol = sys.argv[1]
 x=int(sys.argv[2])
 
 today = date.today()
-last = today - relativedelta(years=x) + relativedelta(days=1)
+last = today - relativedelta(years=x) #+ relativedelta(days=1)
 t = str(symbol)
 
 df = stock_df(symbol="SBIN", from_date=last,to_date=today, series="EQ")
@@ -41,13 +41,6 @@ file=t+".html"
 stime = time.time()
 df.to_html(file)
 etime = time.time() 
-sizes.append(os.path.getsize(file))
-times.append((etime-stime)*10000)
-
-file=t+".tex"
-stime = time.time()
-df.to_latex(file)
-etime = time.time()
 sizes.append(os.path.getsize(file))
 times.append((etime-stime)*10000)
 
@@ -79,8 +72,8 @@ etime = time.time()
 sizes.append(os.path.getsize(file))
 times.append((etime-stime)*10000)
 
-files = ["csv", "json", "html", "tex", "txt", "parquet", "orc", "feather"]
-colors = ['red', 'yellow', 'brown', 'green', 'black', 'blue', 'orange', 'purple']
+files = ["csv", "json", "html", "txt", "parquet", "orc", "feather"]
+colors = ['red', 'yellow', 'brown', 'green', 'black', 'blue', 'orange']
 
 for i in range(len(files)):
     plt.scatter(times[i],sizes[i],c=colors[i], label=files[i])
