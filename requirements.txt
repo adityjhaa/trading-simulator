@@ -3,3 +3,4 @@ jugaad-data
 pyarrow
 matplotlib
 datetime
+fastparquet

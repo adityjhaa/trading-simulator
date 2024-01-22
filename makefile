@@ -11,4 +11,4 @@ run: main.py requirements
 	@python3 main.py $(SYMBOL) $(num_years)
 
 clean:
-
+	@rm SBIN.*
