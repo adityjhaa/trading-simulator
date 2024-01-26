@@ -34,8 +34,8 @@ def register():
             new_user = User(username=username, password=hashed_password)          
             db.session.add(new_user)
             db.session.commit()
+            login_user(new_user, remember=True)
 
-            login_user(user, remember=True)
 
             flash('Registration successful!', category='success')
             return redirect(url_for('views.home'))
