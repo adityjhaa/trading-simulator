@@ -1,2 +1,5 @@
 flask
 flask-login
+pandas
+pandas-datareader
+
