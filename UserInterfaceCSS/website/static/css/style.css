@@ -57,25 +57,8 @@ body{
     background-color: rgba(0, 255, 0, 0.15);
 }
 
-.close{
-    float: right;
-    background: none;
-    border: none;
-    font-size: 1.4rem;
-    display: flex;
-    align-items: start;
-    margin-top: -4px;
-    color: gray;
-    transition: 0.3s;
-}
 
-.close:hover{
-    cursor: pointer;
-}
 
-.close.active .alert{
-    display: none;
-}
 
 .forms{
     width: 100%;
@@ -89,22 +72,22 @@ label{
 }
 .form-item{
     display: block;
-    width: 85%;
+    width: 90%;
     height: 30px;
     border-radius: solid;
     border-width: 1px;
     border-radius: 3px;
     border-color: rgb(151, 146, 146);
-    padding-left:5px;
+    padding:3px 10px;
     font-size: 1rem;
-    margin-top: 15px;
-    margin-bottom: 15px;
+    margin-top: 12px;
+    margin-bottom: 12px;
 }
 
 .submit-btn{
     padding: 8px 20px;
     cursor: pointer;
-    margin-top: 20px;
+    margin-top: 10px;
     margin-left: 35px;
     font-size: 1.1rem;
     border: none;

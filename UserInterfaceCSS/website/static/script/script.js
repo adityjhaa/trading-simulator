@@ -1,6 +1,4 @@
 const links = document.querySelector(".links")
-const closed = document.querySelector(".close")
-
 const burger = document.querySelector(".navbar-click")
 
 burger.addEventListener("click",()=>{
@@ -13,7 +11,3 @@ document.querySelectorAll(".nav-link").forEach(n => n.addEventListener("click", 
     burger.classList.remove("active")
     links.classList.remove("active")
 }))
-
-closed.addEventListener("click",()=>{
-    closed.classList.toggle("active")
-})
