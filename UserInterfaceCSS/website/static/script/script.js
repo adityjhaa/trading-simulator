@@ -1,7 +1,7 @@
-const burger = document.querySelector(".navbar-click")
 const links = document.querySelector(".links")
 const closed = document.querySelector(".close")
 
+const burger = document.querySelector(".navbar-click")
 
 burger.addEventListener("click",()=>{
     burger.classList.toggle("active")

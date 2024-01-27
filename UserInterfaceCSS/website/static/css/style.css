@@ -9,6 +9,7 @@ body{
     display: flex;
     align-items: center;
     padding: 8px 16px 8px 16px;
+    justify-content: space-between;
 }
 
 .nav-link{
@@ -76,11 +77,52 @@ body{
     display: none;
 }
 
+.forms{
+    width: 100%;
+    margin-left: 35px;
+    margin-right: 35px;
+}
+label{
+    font-size: 1.1rem;
+    padding: 20px 0px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.form-item{
+    display: block;
+    width: 85%;
+    height: 30px;
+    border-radius: solid;
+    border-width: 1px;
+    border-radius: 3px;
+    border-color: rgb(151, 146, 146);
+    padding-left:5px;
+    font-size: 1rem;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
 
+.submit-btn{
+    padding: 8px 20px;
+    cursor: pointer;
+    margin-top: 20px;
+    margin-left: 35px;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    background-color: rgba(27, 61, 250,0.8);
+}
 
-
-
-
+.search{
+    min-width: 50px;
+    padding: 5px;
+    background-color: rgb(60, 59, 59);
+    color: white;
+    float: right;
+    border-color: white;
+    border-width: 1px;
+    border-radius: 3px;
+}
 
 
 @media (max-width:768px){
@@ -125,7 +167,11 @@ body{
 }
 
 
-
+h3{
+    font-size: 1.8rem;
+    font-family: sans-serif;
+    font-weight: 500;
+}
 
 
 
