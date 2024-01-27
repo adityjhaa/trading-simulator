@@ -1,1 +1,3 @@
 SBIN.*
+UserInterfaceCSS/instance/
+UserInterfaceCSS/website/__pycache__/
