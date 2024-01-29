@@ -32,13 +32,9 @@
             <span class="bar"></span>
             <span class="bar"></span>
             <span class="bar"></span>
-        </div>
-        {% if user.is_authenticated %}
-        <input class="search" 
-        placeholder="Search Symbol"
-        >
-        {% endif %}
-    </nav>
+        </nav>
+    </div>
+
     {% with messages = get_flashed_messages(with_categories=true) %} {% if
         messages %} {% for category, message in messages %} {% if category == 
         'error' %}

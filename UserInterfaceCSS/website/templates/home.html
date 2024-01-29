@@ -1,4 +1,11 @@
-{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content%} 
     
-    %} {% endblock %}
+    {% if user.is_authenticated %}
+    
+    <form action="" class="search">
+        <input type="" class="search-field" name="symbol" placeholder="Enter Symbol">
+        <button type="submit">Search</button>
+    </form>
+    {% endif %}
 
+    {% endblock %}

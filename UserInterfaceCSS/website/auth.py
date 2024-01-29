@@ -24,7 +24,7 @@ def register():
             return redirect(url_for('auth.login'))
         elif len(username) < 4:
             # message flashing
-            flash('Email must be greater than 3 characters.', category='error')
+            flash('Username must be greater than 3 characters.', category='error')
         elif password1 != password2:
             flash('Passwords must match.', category='error')
         elif len(password1) < 7:

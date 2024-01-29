@@ -96,17 +96,20 @@ label{
     background-color: rgba(27, 61, 250,0.8);
 }
 
-.search{
-    min-width: 50px;
-    padding: 5px;
-    background-color: rgb(60, 59, 59);
-    color: white;
-    float: right;
-    border-color: white;
-    border-width: 1px;
-    border-radius: 3px;
-}
 
+
+.search-field{
+    width: 350px;
+    height: 20px;
+    padding: 5px;
+    background-color: rgb(223, 248, 253);
+    color: rgb(0, 0, 0);
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 3px;
+    margin: 15px 20px;
+    
+}
 
 @media (max-width:768px){
     

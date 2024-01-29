@@ -15,7 +15,7 @@ today = date.today()
 last = today - relativedelta(years=x) #+ relativedelta(days=1)
 t = str(symbol)
 
-df = stock_df(symbol="SBIN", from_date=last,to_date=today, series="EQ")
+df = stock_df(symbol=symbol, from_date=last,to_date=today, series="EQ")
 columns = ['DATE', 'OPEN', 'CLOSE', 'HIGH','LOW', 'LTP', 'VOLUME', 'VALUE', 'NO OF TRADES']
 df = df.loc[:,columns]
 sizes=[]
