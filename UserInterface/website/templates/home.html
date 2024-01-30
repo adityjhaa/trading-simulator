@@ -1,4 +1,28 @@
-<!-- the extends means, this file has the same html as base.html, but can overrite the jinja code -->
-{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
-    %} {% endblock %}
-    
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content%}
+{% if user.is_authenticated %}
+
+<form method="post">
+  <input
+    type="text"
+    class="search-field"
+    id = "symbol"
+    name="symbol"
+    placeholder="Enter Symbol"
+  /></br>
+  <input
+    type="date"
+    class="search-field"
+    id = "start"
+    name="start"
+    placeholder="Enter Start Date"
+  /></br>
+  <input
+    type="date"
+    class="search-field"
+    id = "end"
+    name="end"
+    placeholder="Enter End Date"
+  />
+  <button type="submit">Submit</button></br>
+</form>
+{% endif %} {% endblock %}
