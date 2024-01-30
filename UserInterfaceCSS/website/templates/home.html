@@ -2,10 +2,15 @@
     
     {% if user.is_authenticated %}
     
-    <form action="" class="search">
-        <input type="" class="search-field" name="symbol" placeholder="Enter Symbol">
-        <button type="submit">Search</button>
-    </form>
+    <div class="background">
+        
+        <form action="" class="search">
+            <input type="" class="search-field" name="symbol" placeholder="Enter Symbol">
+            <button type="submit" class="search-button">Search</button>
+        </form>
+        
+    </div>
+
     {% endif %}
 
     {% endblock %}
