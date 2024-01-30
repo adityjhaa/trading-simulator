@@ -89,15 +89,13 @@ label{
     padding: 8px 20px;
     cursor: pointer;
     margin-top: 10px;
-    margin-left: 35px;
+    margin-left: 5px;
     font-size: 1.1rem;
     border: none;
     border-radius: 5px;
     color: white;
-    background-color: rgba(27, 61, 250,0.8);
+    background-color: rgb(255, 155, 32);
 }
-
-
 
 .search-field{
     width: 350px;
