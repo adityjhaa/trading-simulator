@@ -110,11 +110,20 @@ label{
     
 }
 
-.search-button{
-    background-color: rgb(101, 255, 99);
-    color: black;
-    width: 6rem;
-    height: 2.2rem;
+.search-btn{
+    width: 9rem;
+    height: 2.5rem;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-left: 5px;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    background-color: rgb(255, 155, 32);
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 @media (max-width:768px){
@@ -172,6 +181,7 @@ h3{
     display: block;
     position: fixed;
     display: flex;
+    flex-direction: column;
     top: 0px;
     z-index: -1;
     justify-content: center;
@@ -180,7 +190,9 @@ h3{
 }
 
 
-
+#graph{
+    width: 70%;
+}
 
 
 

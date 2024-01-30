@@ -2,4 +2,5 @@ flask
 flask-login
 pandas
 pandas-datareader
-
+plotly
+werkzeug

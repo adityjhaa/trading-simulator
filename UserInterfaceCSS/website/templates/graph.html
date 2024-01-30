@@ -1,13 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chart</title>
-</head>
-<body>
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content%} 
+    
+    {% if user.is_authenticated %}
     <div id = "graph">
         {{ candlestick_chart | safe}}
     </div>
-</body>
-</html>
+    {% endif %}
+
+    {% endblock %}
