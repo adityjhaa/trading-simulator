@@ -102,3 +102,8 @@ def graph():
         return render_template("graph.html", user = current_user, candlestick_chart = candlestick_chart)
 
     return redirect(url_for('views.home'))
+
+@views.route('/compare', methods = ['GET', 'POST'])
+@login_required
+def compare():
+    return render_template("compare.html", user = current_user)

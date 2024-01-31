@@ -230,12 +230,39 @@ h3{
     flex-direction: column;
 }
 
+.comparison-graph{
+    width: 75%;
+    height: 800px;
+}
 
+#graph-comparison-cont{
+    padding: 10px;
+}
 
+.compare-field{
+    width: 350px;
+    height: 30px;
+    padding: 5px;
+    background-color: rgb(223, 248, 253);
+    color: rgb(0, 0, 0);
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 3px;
+    margin: 15px 20px;
+}
 
-
-
-
+.compare-btn{
+    width: 7rem;
+    height: 2rem;
+    cursor: pointer;
+    margin-top: 5px;
+    margin-left: 25px;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    background-color: rgb(255, 155, 32);
+}
 
 
 
