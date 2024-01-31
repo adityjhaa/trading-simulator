@@ -3,12 +3,12 @@
   <div id="graph-cont">
     <div id="graph">{{ candlestick_chart | safe}}</div>
     <div id="buttons">
-      <button class="submit-btn">Compare</button>
+      <a href="/compare" class="submit-btn">Compare</a>
       <a href="/" class="submit-btn">Search</a>
     </div>
   </div>
   <div class="graph-pane">
-    <form method = "POST">
+    <form method="POST">
       <button class="submit-btn" name="Daily" value="Daily" type="submit">
         Daily
       </button>
