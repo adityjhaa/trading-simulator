@@ -11,19 +11,14 @@ views = Blueprint('views', __name__)
 PATH = "./website/data/DATA.pkl"
 
 def generate_candlestick_chart(PATH, symbol):
-    max_sticks=40
     df = pd.read_pickle(PATH)
     df['DATE'] = pd.to_datetime(df['DATE'])
-    num_candlesticks = len(df)
-    print(num_candlesticks)
-    range_start = max(0, num_candlesticks - max_sticks)
-    range_end = num_candlesticks
     candlestick_trace = go.Candlestick(x=df['DATE'],
                                     open=df['OPEN'],
                                     high=df['HIGH'],
                                     low=df['LOW'],
                                     close=df['CLOSE'])
-    layout = go.Layout(title=symbol, xaxis=dict(title='Date'), yaxis=dict(title='Price'),height=800,dragmode='pan', xaxis_rangeslider=dict(visible=True, range=[df['DATE'].iloc[range_start], df['DATE'].iloc[range_end-1]]))
+    layout = go.Layout(title=symbol, xaxis=dict(title='Date'), yaxis=dict(title='Price'),height=800,dragmode='pan')
     figure = go.Figure(data=[candlestick_trace], layout=layout)
     figure.update_layout(
     xaxis=dict(
