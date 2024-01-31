@@ -95,6 +95,8 @@ label{
     border-radius: 5px;
     color: white;
     background-color: rgb(255, 155, 32);
+    text-decoration: none;
+    text-align: center;
 }
 
 .search-field{
@@ -193,8 +195,16 @@ h3{
 #graph{
     width: 70%;
 }
-
-
+#buttons{
+    display: flex;
+    flex-direction: column;
+}
+#graph-cont {
+    display: flex;
+}
+.button-link {
+    text-decoration: none;
+}
 
 
 
