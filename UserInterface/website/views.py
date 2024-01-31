@@ -18,7 +18,7 @@ def generate_candlestick_chart(PATH, symbol):
                                     low=df['LOW'],
                                     close=df['CLOSE'])
 
-    layout = go.Layout(title="Candlestick Chart", xaxis=dict(title='Date'), yaxis=dict(title='Price'),height=600, xaxis_rangeslider_visible=False,dragmode='pan')
+    layout = go.Layout(title=symbol, xaxis=dict(title='Date'), yaxis=dict(title='Price'),height=570, xaxis_rangeslider_visible=False,dragmode='pan')
     figure = go.Figure(data=[candlestick_trace], layout=layout)
     return figure.to_html(full_html=False)
 

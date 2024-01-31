@@ -5,15 +5,19 @@
       <div id="buttons">
         <button class="submit-btn">Add</button>
         <a href = "/" class="submit-btn">Search</a>
-        <button class="submit-btn">Daily</button>
-        <button class="submit-btn">Weekly</button>
-        <button class="submit-btn">Monthly</button>
       </div>
       <div id="stocks-list">
         {% for item in symbols %}
         <p>{{item}}</p>
         {% endfor %}
+
       </div>
+    </div>
+    <div class="graph-pane">
+      <button class="submit-btn">Daily</button>
+      <button class="submit-btn">Weekly</button>
+      <button class="submit-btn">Monthly</button>
+
     </div>
     
     {% endif %} {% endblock %}
