@@ -6,12 +6,12 @@ from . import db
 from flask_login import login_user, login_required, logout_user, current_user
 # Used for UI, and have all the URLs
 
-
 auth = Blueprint('auth', __name__)
 
 @auth.route('/register', methods = ['GET', 'POST'])
 def register():
     if request.method == 'POST':
+        # getting in the details
         username = request.form.get('username')
         password1 = request.form.get('password1')
         password2 = request.form.get('password2')
@@ -36,7 +36,6 @@ def register():
             db.session.commit()
             login_user(new_user, remember=True)
 
-
             flash('Registration successful!', category='success')
             return redirect(url_for('views.home'))
 
@@ -45,8 +44,7 @@ def register():
 @auth.route('/logout')
 @login_required
 def logout():
-    # db.session.pop('user_id', None)
-    # db.session.pop('username', None)
+    # using flask_login, to logout the user
     logout_user()
     flash('Logged out successfully!', category='success')
     return redirect(url_for('auth.login'))
@@ -63,8 +61,8 @@ def login():
         if user:
             if check_password_hash(user.password, password):
                 flash('Logged in successfully!', category='success')
-                login_user(user, remember=True)
                 # this remembers the fact that the user is logged in
+                login_user(user, remember=True)
                 return redirect(url_for('views.home'))    
             else:
                 flash('Incorrect password, try again.', category='error')
