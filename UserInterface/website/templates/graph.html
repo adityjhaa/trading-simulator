@@ -1,9 +1,20 @@
-{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content%} 
-    
-    {% if user.is_authenticated %}
-    <div id = "graph">
-        {{ candlestick_chart | safe}}
+{% extends "base.html" %} {% block title %}Graph{% endblock %} {% block
+    content%} {% if user.is_authenticated %}
+    <div id="graph-cont">
+      <div id="graph">{{ candlestick_chart | safe}}</div>
+      <div id="buttons">
+        <button class="submit-btn">Add</button>
+        <a href = "/" class="submit-btn">Search</a>
+        <button class="submit-btn">Daily</button>
+        <button class="submit-btn">Weekly</button>
+        <button class="submit-btn">Monthly</button>
+      </div>
+      <div id="stocks-list">
+        {% for item in symbols %}
+        <p>{{item}}</p>
+        {% endfor %}
+      </div>
     </div>
-    {% endif %}
-
-    {% endblock %}
+    
+    {% endif %} {% endblock %}
+    
