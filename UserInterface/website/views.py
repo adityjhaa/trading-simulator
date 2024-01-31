@@ -10,9 +10,16 @@ import pandas as pd
 views = Blueprint('views', __name__)
 PATH = "./website/data/DATA.pkl"
 
-def generate_candlestick_chart(PATH, symbol):
+def generate_candlestick_chart(PATH, symbol, button):
     df = pd.read_pickle(PATH)
-    df['DATE'] = pd.to_datetime(df['DATE'])
+    if button == "m":
+        df['idx'] = df['DATE']
+        df.set_index('idx', inplace = True)
+        df = df.resample('M').last()
+    if button == "w":
+        df['idx'] = df['DATE']
+        df.set_index('idx', inplace = True)
+        df = df.resample('W').last()
     candlestick_trace = go.Candlestick(x=df['DATE'],
                                     open=df['OPEN'],
                                     high=df['HIGH'],
@@ -77,13 +84,21 @@ def home():
 @views.route('/graph', methods = ['GET', 'POST'])
 @login_required
 def graph():
-    df = request.args.get('arg1')
+    PATH = request.args.get('arg1')
     symbol = request.args.get('arg2')
-    symbols = []
-    symbols.append(symbol)
-    if df:
-        candlestick_chart = generate_candlestick_chart(df, symbol)
-
-        return render_template("graph.html", user = current_user, candlestick_chart = candlestick_chart, symbols = symbols)
+    button = ""
+    if request.method == "POST":
+        button_daily = request.form.get('Daily')
+        button_weekly = request.form.get('Weekly')
+        button_monthly = request.form.get('Monthly')
+        if button_daily:
+            button = "d"
+        elif button_weekly:
+            button = "w"
+        elif button_monthly:
+            button = "m"
+    if PATH:
+        candlestick_chart = generate_candlestick_chart(PATH, symbol, button)
+        return render_template("graph.html", user = current_user, candlestick_chart = candlestick_chart)
 
     return redirect(url_for('views.home'))
