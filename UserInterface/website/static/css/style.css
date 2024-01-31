@@ -173,6 +173,9 @@ label{
         left: 0;
 
     }
+    #graph{
+        width: 90%;
+    }
 }
 
 
@@ -204,6 +207,7 @@ h3{
 #buttons{
     display: flex;
     flex-direction: column;
+    margin-right: 5px;
 }
 #graph-cont {
     display: flex;
@@ -212,13 +216,19 @@ h3{
 .graph-pane{
     display: flex;
     justify-content: center;
+    margin-bottom: 20px;
 }
 
 .graph-pane > button{
     width: 8rem;
+    background-color: chocolate;
+    border-radius: 2px;
 }
 
-
+.stocks-lists{
+    display: flex;
+    flex-direction: column;
+}
 
 
 

@@ -8,18 +8,48 @@ import plotly.graph_objs as go
 import pandas as pd
 
 views = Blueprint('views', __name__)
-PATH = "./website/DATA/DATA.pkl"
+PATH = "./website/data/DATA.pkl"
 
 def generate_candlestick_chart(PATH, symbol):
+    max_sticks=40
     df = pd.read_pickle(PATH)
+    df['DATE'] = pd.to_datetime(df['DATE'])
+    num_candlesticks = len(df)
+    print(num_candlesticks)
+    range_start = max(0, num_candlesticks - max_sticks)
+    range_end = num_candlesticks
     candlestick_trace = go.Candlestick(x=df['DATE'],
                                     open=df['OPEN'],
                                     high=df['HIGH'],
                                     low=df['LOW'],
                                     close=df['CLOSE'])
-
-    layout = go.Layout(title=symbol, xaxis=dict(title='Date'), yaxis=dict(title='Price'),height=570, xaxis_rangeslider_visible=False,dragmode='pan')
+    layout = go.Layout(title=symbol, xaxis=dict(title='Date'), yaxis=dict(title='Price'),height=800,dragmode='pan', xaxis_rangeslider=dict(visible=True, range=[df['DATE'].iloc[range_start], df['DATE'].iloc[range_end-1]]))
     figure = go.Figure(data=[candlestick_trace], layout=layout)
+    figure.update_layout(
+    xaxis=dict(
+        rangeselector=dict(
+            buttons=list([
+                dict(count=1,
+                     label="1m",
+                     step="month",
+                     stepmode="backward"),
+                dict(count=6,
+                     label="6m",
+                     step="month",
+                     stepmode="backward"),
+                dict(count=1,
+                     label="1y",
+                     step="year",
+                     stepmode="backward"),
+                dict(step="all")
+                ])
+            ),
+            rangeslider=dict(
+                visible=True
+            ),
+            type="date"
+        )
+    )
     return figure.to_html(full_html=False)
 
 @views.route('/', methods = ['GET', 'POST'])
@@ -27,7 +57,7 @@ def generate_candlestick_chart(PATH, symbol):
 def home():
 
     today = date.today()
-    last = today - relativedelta(years = 2)
+    last = today - relativedelta(years = 5)
     df = stock_df(symbol = "SBIN", from_date=last, to_date=today, series="EQ")
 
     if request.method=='POST':
