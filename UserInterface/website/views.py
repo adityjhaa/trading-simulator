@@ -8,7 +8,7 @@ import plotly.graph_objs as go
 import pandas as pd
 
 views = Blueprint('views', __name__)
-PATH = "./website/DATA/df.pkl"
+PATH = "./website/DATA/DATA.pkl"
 
 def generate_candlestick_chart(PATH, symbol):
     df = pd.read_pickle(PATH)
