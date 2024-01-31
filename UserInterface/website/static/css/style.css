@@ -4,6 +4,7 @@ body{
 
 .navbar{
     height: 40px;
+    width: 100%;
     background-color: #343a40;
     color: #212529;
     display: flex;
@@ -89,7 +90,7 @@ label{
     padding: 8px 20px;
     cursor: pointer;
     margin-top: 10px;
-    margin-left: 5px;
+    margin-left: 40px;
     font-size: 1.1rem;
     border: none;
     border-radius: 5px;
@@ -131,6 +132,10 @@ label{
     .navbar-click{
         display: block;
         float: left;
+    }
+
+    .navbar{
+        width: 100%;
     }
 
     .navbar-click.active .bar:nth-child(2){
