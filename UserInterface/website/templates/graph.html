@@ -1,25 +1,24 @@
 {% extends "base.html" %} {% block title %}Graph{% endblock %} {% block
-  content%} {% if user.is_authenticated %}
-  <div id="graph-cont">
-    <div id="graph">{{ candlestick_chart | safe}}</div>
-    <div id="buttons">
-      <a href="/compare" class="submit-btn">Compare</a>
-      <a href="/" class="submit-btn">Search</a>
-    </div>
+content%} {% if user.is_authenticated %}
+<div id="graph-cont">
+  <div id="graph">{{ candlestick_chart | safe}}</div>
+  <div id="buttons">
+    <a href="/compare" class="submit-btn">Compare</a>
+    <a href="/" class="submit-btn">Search</a>
   </div>
-  <div class="graph-pane">
-    <form method="POST">
-      <button class="submit-btn" name="Daily" value="Daily" type="submit">
-        Daily
-      </button>
-      <button class="submit-btn" name="Weekly" value="Weekly" type="submit">
-        Weekly
-      </button>
-      <button class="submit-btn" name="Monthly" value="Monthly" type="submit">
-        Monthly
-      </button>
-    </form>
-  </div>
-  
-  {% endif %} {% endblock %}
-  
+</div>
+<div class="graph-pane">
+  <form method="POST">
+    <button class="submit-btn" name="Daily" value="Daily" type="submit">
+      Daily
+    </button>
+    <button class="submit-btn" name="Weekly" value="Weekly" type="submit">
+      Weekly
+    </button>
+    <button class="submit-btn" name="Monthly" value="Monthly" type="submit">
+      Monthly
+    </button>
+  </form>
+</div>
+
+{% endif %} {% endblock %}
