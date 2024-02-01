@@ -71,10 +71,19 @@ h3 {
 }
 
 /* input for login/register */
+
+.auth-form{
+    display: flex;
+    width: 400px;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    transition: all 0.3s ease-in-out;
+}
+
 .forms {
     width: 100%;
-    margin-left: 35px;
-    margin-right: 35px;
 }
 
 label {
@@ -101,7 +110,6 @@ label {
     padding: 8px 20px;
     cursor: pointer;
     margin-top: 10px;
-    margin-left: 40px;
     font-size: 1.1rem;
     border: none;
     border-radius: 5px;
