@@ -1,37 +1,19 @@
-{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content%} 
-    
-    {% if user.is_authenticated %}
-    
-    <div class="background">
-        
-        <form method="post">
-            <input
-              type="text"
-              class="search-field"
-              id = "symbol"
-              name="symbol"
-              placeholder="Enter Symbol"
-              /></br>
-              <input
-              type="date"
-              class="search-field"
-              id = "end"
-              name="end"
-              placeholder="Enter End Date"
-              /></br>
-              <input
-              type="date"
-              class="search-field"
-              id = "start"
-              name="start"
-              placeholder="Enter Start Date"
-            />
-            <br>
-            <button type="submit" class = "search-btn">Search</button>
-          </form>
-        
-    </div>
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content%}
 
-    {% endif %}
+{% if user.is_authenticated %}
 
-    {% endblock %}
+<div class="background">
+
+  <form method="post">
+    <input type="text" class="search-field" id="symbol" name="symbol" placeholder="Enter Symbol" /></br>
+    <input type="date" class="search-field" id="end" name="end" placeholder="Enter End Date" /></br>
+    <input type="date" class="search-field" id="start" name="start" placeholder="Enter Start Date" />
+    <br>
+    <button type="submit" class="search-btn">Search</button>
+  </form>
+
+</div>
+
+{% endif %}
+
+{% endblock %}

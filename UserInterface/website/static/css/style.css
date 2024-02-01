@@ -1,8 +1,16 @@
-body{
+/* common for all pages */
+
+body {
     margin: 0px;
 }
 
-.navbar{
+h3 {
+    font-size: 1.8rem;
+    font-family: sans-serif;
+    font-weight: 500;
+}
+
+.navbar {
     height: 40px;
     width: 100%;
     background-color: #343a40;
@@ -14,32 +22,32 @@ body{
     z-index: 1;
 }
 
-.nav-link{
-    color: rgba(255,255,255,.5);    
+.nav-link {
+    color: rgba(255, 255, 255, .5);
     text-decoration: none;
     padding: 0.5rem 1.5rem;
-    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     text-align: left;
     font-size: 1rem;
     transition: 0.2s ease;
 }
 
-.links{
+.links {
     display: flex;
 }
 
-.nav-link:hover{
+.nav-link:hover {
     color: lightgray;
 
 }
 
-.navbar-click{
+.navbar-click {
     display: none;
     cursor: pointer;
 }
 
-.bar{
-    background-color: white;  
+.bar {
+    background-color: white;
     display: block;
     width: 25px;
     height: 3px;
@@ -48,29 +56,34 @@ body{
     transition: all 0.3s ease-in-out;
 }
 
-.alert{
+/* alert messages */
+
+.alert {
     padding: 1rem;
 }
 
-.alert-danger{
+.alert-danger {
     background-color: rgba(255, 0, 0, 0.12);
 }
 
-.alert-success{
+.alert-success {
     background-color: rgba(0, 255, 0, 0.15);
 }
 
-.forms{
+/* input for login/register */
+.forms {
     width: 100%;
     margin-left: 35px;
     margin-right: 35px;
 }
-label{
+
+label {
     font-size: 1.1rem;
     padding: 20px 0px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
-.form-item{
+
+.form-item {
     display: block;
     width: 90%;
     height: 30px;
@@ -78,13 +91,13 @@ label{
     border-width: 1px;
     border-radius: 3px;
     border-color: rgb(151, 146, 146);
-    padding:3px 10px;
+    padding: 3px 10px;
     font-size: 1rem;
     margin-top: 12px;
     margin-bottom: 12px;
 }
 
-.submit-btn{
+.submit-btn {
     padding: 8px 20px;
     cursor: pointer;
     margin-top: 10px;
@@ -98,7 +111,26 @@ label{
     text-align: center;
 }
 
-.search-field{
+/* home page */
+
+.background {
+    background-image: url("../assets/backgroundimg.jpg");
+    width: 100%;
+    height: 100vh;
+    display: block;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    top: 0px;
+    z-index: -1;
+    justify-content: center;
+    align-items: center;
+    filter: brightness(75%);
+}
+
+/* search stocks */
+
+.search-field {
     width: 350px;
     height: 30px;
     padding: 5px;
@@ -108,10 +140,10 @@ label{
     border-width: 2px;
     border-radius: 3px;
     margin: 15px 20px;
-    
+
 }
 
-.search-btn{
+.search-btn {
     width: 9rem;
     height: 2.5rem;
     cursor: pointer;
@@ -127,79 +159,9 @@ label{
     transform: translateX(-50%);
 }
 
-@media (max-width:768px){
-    
-    .navbar-click{
-        display: block;
-        float: left;
-        padding-left: 10px;
-    }
+/* stock-graph */
 
-    .navbar{
-        width: 100%;
-    }
-
-    .navbar-click.active .bar:nth-child(2){
-        opacity: 0;
-    }
-    
-    .navbar-click.active .bar:nth-child(1){
-        transform: translateY(8px) rotate(45deg);
-    }
-    
-    .navbar-click.active .bar:nth-child(3){
-        transform: translateY(-8px) rotate(-45deg);
-    }
-    
-    .links{
-        position: fixed;
-        left: -100%;
-        top:40px;
-        gap: 0;
-        flex-direction: column;
-        background-color: #343a40;
-        width: 100%;
-        text-align: center;
-        transition: 0.5s ease-in-out;
-    }
-
-    .nav-link{
-        margin: 16px 0px;
-    }
-
-    .links.active{
-        left: 0;
-
-    }
-    #graph{
-        width: 90%;
-    }
-}
-
-
-h3{
-    font-size: 1.8rem;
-    font-family: sans-serif;
-    font-weight: 500;
-}
-
-.background{
-    background-image: url("../assets/backgroundimg.jpg");
-    width: 100%;
-    height: 100vh;
-    display: block;
-    position: fixed;
-    display: flex;
-    flex-direction: column;
-    top: 0px;
-    z-index: -1;
-    justify-content: center;
-    align-items: center;
-    filter: brightness(75%);
-}
-
-
-#graph{
+#graph {
     width: 85%;
 }
 
@@ -208,33 +170,36 @@ h3{
     padding: 0px;
 }
 
-.graph-pane{
+.graph-pane {
     display: flex;
     justify-content: center;
     margin-bottom: 20px;
 }
 
-.graph-pane .submit-btn{
+.graph-pane .submit-btn {
     width: 7rem;
     background-color: chocolate;
     border-radius: 2px;
 }
 
-.comparison-graph{
+/* stocks-comparison */
+
+.comparison-graph {
     width: 90%;
 }
 
-#graph-comparison-cont{
+#graph-comparison-cont {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.compare-field-cont{
+.compare-field-cont {
     display: flex;
     flex-direction: column;
 }
-.compare-field{
+
+.compare-field {
     width: 350px;
     height: 30px;
     padding: 5px;
@@ -246,7 +211,7 @@ h3{
     margin: 15px 20px;
 }
 
-.compare-btn{
+.compare-btn {
     width: 7rem;
     height: 2rem;
     cursor: pointer;
@@ -259,6 +224,55 @@ h3{
     transform: translateX(-50%);
 }
 
+/* for mobile and smaller devices */
 
+@media (max-width:768px) {
 
+    .navbar-click {
+        display: block;
+        float: left;
+        padding-left: 10px;
+    }
+
+    .navbar {
+        width: 100%;
+    }
+
+    .navbar-click.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .navbar-click.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    .navbar-click.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+    .links {
+        position: fixed;
+        left: -100%;
+        top: 40px;
+        gap: 0;
+        flex-direction: column;
+        background-color: #343a40;
+        width: 100%;
+        text-align: center;
+        transition: 0.5s ease-in-out;
+    }
+
+    .nav-link {
+        margin: 16px 0px;
+    }
+
+    .links.active {
+        left: 0;
+
+    }
+
+    #graph {
+        width: 90%;
+    }
+}
 

@@ -1,26 +1,21 @@
 {% extends "base.html" %} {% block title %}Graph{% endblock %} {% block
-    content%} {% if user.is_authenticated %}
-    <div id="graph-comparison-cont">
-        <form method="post">
-            <input
-            type="text"
-            class="compare-field"
-            id = "add-symbol"
-            name="add-symbol"
-            placeholder="Add Symbol to compare"
-            style="width: auto;"
-            /></br>
-            <button type="submit" class = "compare-btn">Add</button>
+content%} {% if user.is_authenticated %}
+<div id="graph-comparison-cont">
+    <form method="post">
+        <input type="text" class="compare-field" id="add-symbol" name="add-symbol" placeholder="Add Symbol to compare"
+            style="width: auto;" /></br>
+        <button type="submit" class="compare-btn">Add</button>
+    </form>
+    <div class="comparison-graph">
+        {{ compare_graph | safe }}
+        <form method="POST">
+            <div style="display: flex; justify-content: end; padding: 20px; padding-top: 0px;">
+                <button class="submit-btn" name="clear" type="submit" value="clear"
+                    style="background-color: gray;">Clear</button>
+            </div>
         </form>
-        <div class="comparison-graph">
-            {{ compare_graph | safe }}
-            <form method = "POST">
-                <div style="display: flex; justify-content: end; padding: 20px; padding-top: 0px;">
-                    <button class="submit-btn" name = "clear" type = "submit" value="clear" style="background-color: gray;">Clear</button>
-                </div>
-            </form>
-        </div>
-
     </div>
 
-    {% endif %} {% endblock %}
+</div>
+
+{% endif %} {% endblock %}
