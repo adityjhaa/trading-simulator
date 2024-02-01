@@ -52,11 +52,17 @@ def generate_rsi_trace(df):
 
 def generate_s50_trace(df):
     sma_window = 50
-    df['SMA50'] = df['Close'].rolling(window=sma_window, min_periods=1).mean()
+    df['SMA50'] = df['CLOSE'].rolling(window=sma_window, min_periods=1).mean()
+
+    s50_trace = go.Scatter(x = df['DATE'], y = df['SMA50'], mode = 'lines', name='SMA50 line')
+    return s50_trace
 
 def generate_s100_trace(df):
     sma_window = 100
-    df['SMA100'] = df['Close'].rolling(window=sma_window, min_periods=1).mean()
+    df['SMA100'] = df['CLOSE'].rolling(window=sma_window, min_periods=1).mean()
+
+    s100_trace = go.Scatter(x = df['DATE'], y = df['SMA100'], mode = 'lines', name='SMA100 line')
+    return s100_trace
 
 def generate_candlestick_chart(PATH, symbol, button, indicators = ""):
     df = pd.read_pickle(PATH)
@@ -90,8 +96,10 @@ def generate_candlestick_chart(PATH, symbol, button, indicators = ""):
         trace_list.append(rsi_trace)
     if 's50' in indicators:
         s50_trace = generate_s50_trace(df)
+        trace_list.append(s50_trace)
     if 's100' in indicators:
         s100_trace = generate_s100_trace(df)
+        trace_list.append(s100_trace)
 
     layout = go.Layout(title=symbol, xaxis=dict(title='Date'), yaxis=dict(title='Price'),height=800,dragmode='pan')
     figure = go.Figure(data=trace_list, layout=layout)
