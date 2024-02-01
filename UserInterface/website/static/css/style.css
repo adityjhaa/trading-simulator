@@ -200,12 +200,12 @@ h3{
 
 
 #graph{
-    width: 90%;
+    width: 85%;
 }
 
 #graph-cont {
     display: flex;
-    justify-content: center;
+    padding: 0px;
 }
 
 .graph-pane{
@@ -214,15 +214,10 @@ h3{
     margin-bottom: 20px;
 }
 
-.graph-pane > button{
-    width: 8rem;
+.graph-pane .submit-btn{
+    width: 7rem;
     background-color: chocolate;
     border-radius: 2px;
-}
-
-.stocks-lists{
-    display: flex;
-    flex-direction: column;
 }
 
 .comparison-graph{
