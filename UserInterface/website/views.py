@@ -10,6 +10,7 @@ import pandas as pd
 views = Blueprint('views', __name__)
 PATH = "./website/data/DATA.pkl"
 
+stock_symbol=[]
 stock_lists=[]
 indicators = []
 
@@ -214,8 +215,9 @@ def graph():
 @login_required
 def compare():
     if request.method == "POST":
-        if request.form.get('add-symbol'):
-            symbol = request.form.get('add-symbol')
+        symbol = request.form.get('add-symbol')
+        if symbol and (symbol not in stock_symbol):
+            stock_symbol.append(symbol)
             today = date.today()
             last = today - relativedelta(years = 5)
             df = stock_df(symbol = symbol, from_date=last, to_date=today, series="EQ")
