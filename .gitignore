@@ -1,4 +1,3 @@
 SBIN.*
 UserInterface/instance/
 UserInterface/website/__pycache__/
-UserInterface/website/data/
