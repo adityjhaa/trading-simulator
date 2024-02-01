@@ -1,21 +1,24 @@
 {% extends "base.html" %} {% block title %}Graph{% endblock %} {% block
-content%} {% if user.is_authenticated %}
-<div id="graph-cont">
-  <div id="graph">{{ candlestick_chart | safe}}</div>
-
-</div>
-<div class="graph-pane">
-  <form method="POST">
-    <button class="submit-btn" name="Daily" value="Daily" type="submit">
-      Daily
-    </button>
-    <button class="submit-btn" name="Weekly" value="Weekly" type="submit">
-      Weekly
-    </button>
-    <button class="submit-btn" name="Monthly" value="Monthly" type="submit">
-      Monthly
-    </button>
-  </form>
-</div>
-
-{% endif %} {% endblock %}
+  content%} {% if user.is_authenticated %}
+  <div id="graph-cont">
+    <div id="graph">{{ candlestick_chart | safe}}</div>
+    <div class = "stocks-list">
+      <button class="submit-btn" name = "Add">Add</button>
+    </div>
+  </div>
+  <div class="graph-pane">
+    <form method="POST">
+      <button class="submit-btn" name="Daily" value="Daily" type="submit">
+        Daily
+      </button>
+      <button class="submit-btn" name="Weekly" value="Weekly" type="submit">
+        Weekly
+      </button>
+      <button class="submit-btn" name="Monthly" value="Monthly" type="submit">
+        Monthly
+      </button>
+    </form>
+  </div>
+  
+  {% endif %} {% endblock %}
+  
