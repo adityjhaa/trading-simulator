@@ -7,13 +7,17 @@ from jugaad_data.nse import stock_df
 import plotly.graph_objs as go
 import pandas as pd
 
+# setting the blueprint
 views = Blueprint('views', __name__)
+# path variable of the pickle file storing the data
 PATH = "./website/data/DATA.pkl"
 
+# global variables for diplaying multiple indicators and stocks
 stock_symbol=[]
 stock_lists=[]
 indicators = []
 
+# ----------------------------------------------------------------------- trace generator functions for indicators -------------------------------------------------------------------- 
 def generate_macd_trace(df):
     short_window = 12
     long_window = 26
@@ -65,6 +69,7 @@ def generate_s100_trace(df):
     s100_trace = go.Scatter(x = df['DATE'], y = df['SMA100'], mode = 'lines', name='SMA100 line')
     return s100_trace
 
+# -------------------------------------------------------------------------------- trace generator function for candlestick graph ------------------------------------------------------------
 def generate_candlestick_chart(PATH, symbol, button, indicators = ""):
     df = pd.read_pickle(PATH)
     if button == "d":
@@ -131,6 +136,7 @@ def generate_candlestick_chart(PATH, symbol, button, indicators = ""):
     )
     return figure.to_html(full_html=False)
 
+# home page, this function manages, the symbol, from_date and to_date, from the user, and convert the data into pickle file
 @views.route('/', methods = ['GET', 'POST'])
 @login_required
 def home():
@@ -158,6 +164,7 @@ def home():
 
     return render_template("home.html", user = current_user)
 
+# this function manages the graph.html page, wich has options of indicators, and daily, monthly, weekly data buttons
 @views.route('/graph', methods = ['GET', 'POST'])
 @login_required
 def graph():
@@ -166,7 +173,6 @@ def graph():
     PATH = request.args.get('arg1')
     symbol = request.args.get('arg2')
     button = ""
-    print(indicators)
     
     if request.method == "POST":
         
@@ -211,6 +217,7 @@ def graph():
 
     return redirect(url_for('views.home'))
 
+# this function manages the compare page, where we can compare two different stocks on the same graph, using the closing price
 @views.route('/compare', methods = ['GET', 'POST'])
 @login_required
 def compare():
