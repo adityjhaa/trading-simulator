@@ -185,14 +185,22 @@ def graph():
         button_RSI = request.form.get('RSI')
         button_SMA_50 = request.form.get('SMA-50')
         button_SMA_100 = request.form.get('SMA-100')
-        if button_MACD:
+        if button_MACD and 'm' not in indicators:
             indicators.append('m')
-        if button_RSI:
+        elif button_MACD and 'm' in indicators:
+            indicators.remove('m')
+        if button_RSI and 'r' not in indicators:
             indicators.append('r')
-        if button_SMA_50:
+        elif button_RSI and 'r' in indicators:
+            indicators.remove('r')
+        if button_SMA_50 and 's50' not in indicators:
             indicators.append('s50')
-        if button_SMA_100:
+        elif button_SMA_50 and 's50' in indicators:
+            indicators.remove('s50')
+        if button_SMA_100 and 's100' not in indicators:
             indicators.append('s100')
+        elif button_SMA_100 and 's100' in indicators:
+            indicators.remove('s100')
         if request.form.get('clear'):
             indicators.clear()
         
