@@ -136,6 +136,7 @@ def generate_candlestick_chart(PATH, symbol, button, indicators = ""):
     )
     return figure.to_html(full_html=False)
 
+# ------------------------------------------------------------------------------------- HOME ------------------------------------------------------------------------------------------
 # home page, this function manages, the symbol, from_date and to_date, from the user, and convert the data into pickle file
 @views.route('/', methods = ['GET', 'POST'])
 @login_required
@@ -164,6 +165,7 @@ def home():
 
     return render_template("home.html", user = current_user)
 
+# ------------------------------------------------------------------------------------- GRAPH ------------------------------------------------------------------------------------------
 # this function manages the graph.html page, wich has options of indicators, and daily, monthly, weekly data buttons
 @views.route('/graph', methods = ['GET', 'POST'])
 @login_required
@@ -217,6 +219,7 @@ def graph():
 
     return redirect(url_for('views.home'))
 
+# ------------------------------------------------------------------------------------- COMPARE ------------------------------------------------------------------------------------------
 # this function manages the compare page, where we can compare two different stocks on the same graph, using the closing price
 @views.route('/compare', methods = ['GET', 'POST'])
 @login_required
