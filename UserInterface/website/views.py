@@ -118,7 +118,7 @@ def compare():
             df = stock_df(symbol = symbol, from_date=last, to_date=today, series="EQ")
             stock_lists.append(df)
 
-    print(len(stock_lists))
+
     trace_list=[]
     for stock in stock_lists:
         trace_list.append(go.Scatter(x=stock['DATE'],
@@ -126,7 +126,7 @@ def compare():
                                      mode='lines',
                                      name=stock['SYMBOL'][0]
                                      ))
-    layout = go.Layout(title='COMPARISON CHART', xaxis=dict(title='Date'),yaxis=dict(title='Price'),xaxis_rangeslider=dict(visible=True),height=700)
+    layout = go.Layout(title='COMPARISON CHART', xaxis=dict(title='Date'),yaxis=dict(title='Price'),xaxis_rangeslider=dict(visible=True),height=800)
     figure = go.Figure(data=trace_list, layout=layout)
     chart = figure.to_html(full_html=False)
 

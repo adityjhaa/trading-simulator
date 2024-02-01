@@ -55,12 +55,10 @@ body{
 .alert-danger{
     background-color: rgba(255, 0, 0, 0.12);
 }
+
 .alert-success{
     background-color: rgba(0, 255, 0, 0.15);
 }
-
-
-
 
 .forms{
     width: 100%;
@@ -228,14 +226,19 @@ h3{
 }
 
 .comparison-graph{
-    width: 85%;
-    height: 800px;
+    width: 90%;
 }
 
 #graph-comparison-cont{
-    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
+.compare-field-cont{
+    display: flex;
+    flex-direction: column;
+}
 .compare-field{
     width: 350px;
     height: 30px;
@@ -252,13 +255,13 @@ h3{
     width: 7rem;
     height: 2rem;
     cursor: pointer;
-    margin-top: 5px;
-    margin-left: 25px;
     font-size: 1.1rem;
     border: none;
     border-radius: 5px;
     color: white;
     background-color: rgb(255, 155, 32);
+    margin-left: 50%;
+    transform: translateX(-50%);
 }
 
 
