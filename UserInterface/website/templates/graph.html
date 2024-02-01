@@ -2,10 +2,7 @@
 content%} {% if user.is_authenticated %}
 <div id="graph-cont">
   <div id="graph">{{ candlestick_chart | safe}}</div>
-  <div id="buttons">
-    <a href="/compare" class="submit-btn">Compare</a>
-    <a href="/" class="submit-btn">Search</a>
-  </div>
+
 </div>
 <div class="graph-pane">
   <form method="POST">

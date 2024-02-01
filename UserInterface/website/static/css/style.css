@@ -202,15 +202,12 @@ h3{
 
 
 #graph{
-    width: 75%;
+    width: 90%;
 }
-#buttons{
-    display: flex;
-    flex-direction: column;
-    margin-right: 5px;
-}
+
 #graph-cont {
     display: flex;
+    justify-content: center;
 }
 
 .graph-pane{
@@ -231,7 +228,7 @@ h3{
 }
 
 .comparison-graph{
-    width: 75%;
+    width: 85%;
     height: 800px;
 }
 
