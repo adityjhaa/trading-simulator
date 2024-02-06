@@ -4,43 +4,43 @@ using namespace std;
 
 int main(int argv, char *argc[])
 {
-    string stratergy = argc[1];
+    string strategy = argc[1];
 
     string str = "";
 
-    if (stratergy == "BASIC")
+    if (strategy == "BASIC")
     {
         str = "basic";
     }
-    else if (stratergy == "DMA")
+    else if (strategy == "DMA")
     {
         str = "dma";
     }
-    else if (stratergy == "DMA++")
+    else if (strategy == "DMA++")
     {
         str = "dmapp";
     }
-    else if (stratergy == "MACD")
+    else if (strategy == "MACD")
     {
         str = "macd";
     }
-    else if (stratergy == "RSI")
+    else if (strategy == "RSI")
     {
         str = "rsi";
     }
-    else if (stratergy == "ADX")
+    else if (strategy == "ADX")
     {
         str = "adx";
     }
-    else if (stratergy == "LINEAR_REGRESSION")
+    else if (strategy == "LINEAR_REGRESSION")
     {
         str = "linregr";
     }
-    else if (stratergy == "BEST_OF_ALL")
+    else if (strategy == "BEST_OF_ALL")
     {
         str = "bestall";
     }
-    else if (stratergy == "PAIRS")
+    else if (strategy == "PAIRS")
     {
         str = "pairs";
     }
