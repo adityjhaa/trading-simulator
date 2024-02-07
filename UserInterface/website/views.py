@@ -247,3 +247,9 @@ def compare():
     chart = figure.to_html(full_html=False)
 
     return render_template("compare.html", user = current_user, compare_graph=chart)
+
+# ------------------------------------------------------------------------------------- FILTER ------------------------------------------------------------------------------------------
+@views.route('/filter', methods = ['GET', 'POST'])
+@login_required
+def filter():
+    return render_template("filter.html", user = current_user)
