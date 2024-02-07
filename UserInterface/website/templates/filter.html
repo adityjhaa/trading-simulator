@@ -1,13 +1,15 @@
-{% extends "base.html" %} {% block title %}Graph{% endblock %} {% block
+{% extends "base.html" %} {% block title %}Filters{% endblock %} {% block
     content%} {% if user.is_authenticated %}
     
-  <form method="post">
-    <input type="text" class="search-field" id="filter" name="filter" placeholder="Enter Filter" /></br>
-    <input type="number" class="search-field" id="number" name="number" placeholder="Enter no. of stocks" /></br>
-    <br>
-    <button type="submit" class="search-btn">Apply</button>
-  </form>
-
+    <div class="filter-container">
+      <form method="post">
+        <input type="text" class="search-field" id="filter" name="filter" placeholder="Enter Filter" /></br>
+        <input type="number" class="search-field" id="number" name="number" placeholder="Enter no. of stocks" /></br>
+        <br>
+        <button type="submit" class="search-btn">Apply</button>
+      </form>
+      
+    </div>
 
     {% endif %} {% endblock %}
     
