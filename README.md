@@ -2,7 +2,7 @@
 
 ## 1\. Introduction
 
-The primary goal is to provide users with a user-friendly interface to view stock data, compare multiple stocks on the same graph, and apply various filters for better analysis.
+The primary goal is to provide users with a user-friendly interface to view stock data, compare multiple stocks on the same graph, and apply various indicators for better analysis.
 
 ## 2\. Technologies Used
 
@@ -38,13 +38,13 @@ The primary goal is to provide users with a user-friendly interface to view stoc
 
 ### 3.3 Filtering Options:
 
-To enhance analysis, the backend supports various filters:
+To enhance analysis, the backend supports various indicators:
 
 -   MACD: Moving Average Convergence Divergence is also implemented for the user to check the validity of the stock.
 
 -   SMA: Incorporating Simple Moving Averages (SMA) with customizable window sizes (we used SBA-50 and SBA-100).
 
--   RSI: Users can apply Relative Strength Index(RSI) filters to identify overbought or oversold conditions.
+-   RSI: Users can apply Relative Strength Index(RSI) indicators to identify overbought or oversold conditions.
 
 ### 3.4 User Authentication and Authorization:
 
@@ -58,7 +58,7 @@ The backend follows a modular and scalable architecture:
 
 -   Routes: Defined for handling different URLs and HTTP methods.
 
--   Controllers: Responsible for handling business logic, such as fetching stock data, applying filters, and preparing data for visualization.
+-   Controllers: Responsible for handling business logic, such as fetching stock data, applying indicators, and preparing data for visualization.
 
 -   Models: Represent the data structures used in the application.
 
@@ -95,14 +95,14 @@ useful options here:
 
 -   He/she can choose to view in some pre-defined time ranges (e.g. 1 month, 6 month, 1 year, etc.).
 
--   He/she can choose between a number of technical filters for enhanced analysis (e.g. MACD, RSI, SMA).
+-   He/she can choose between a number of technical indicators for enhanced analysis (e.g. MACD, RSI, SMA).
 
 -   Adjustment of range with the help of the range-slider facilitates the experience even more.
 
 ![](.//media/image1.png)
 <br><br>
 
-An example of filters is shown below.
+An example of indicators is shown below.
 
 ![](.//media/image6.png)
 <br><br>
