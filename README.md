@@ -36,7 +36,7 @@ The primary goal is to provide users with a user-friendly interface to view stoc
 
 -   Users can input stock symbols or select from a predefined list to visualize the performance of multiple stocks simultaneously.
 
-### 3.3 Filtering Options:
+### 3.3 Indicator Options:
 
 To enhance analysis, the backend supports various indicators:
 
