@@ -17,6 +17,7 @@ PATH = "./website/data/DATA.pkl"
 stock_symbol=[]
 stock_lists=[]
 indicators = []
+result = []
 
 # ------------------------------------------------------------------------ filter helpers ----------------------------------------------------------------------------------------
 def get_PE(symbol):
@@ -340,5 +341,5 @@ def filter():
                 result = list[:number]
             else:
                 flash("Filter Type Not Supported", category='error')
-            return render_template("filter.html", user = current_user)
+            return render_template("filter.html", user = current_user, flist=result)
     return render_template("filter.html", user = current_user)
