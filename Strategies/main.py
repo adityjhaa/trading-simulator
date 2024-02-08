@@ -16,8 +16,9 @@ def generate_dataframe(symbol, today, lastday):
     la_year = int(lastday[6:10])
     
     df = pd.DataFrame(stock_df(symbol=symbol, from_date=date(to_year, to_month, to_day), to_date=date(la_year, la_month, la_day), series="EQ"))
-    df = df[[ "DATE", "OPEN", "CLOSE", "HIGH","LOW", "LTP", "VOLUME", "VALUE","NO OF TRADES"]]
-    return df
+    df = df[[ "DATE", "CLOSE"]]
+    df = df.iloc[::-1]
+    df.to_csv("Stocks/"+symbol+".csv", index=False)
 
 
 # ----------------------------------------------- pickle --------------------------------------------------------
@@ -30,8 +31,8 @@ def main():
     today = sys.argv[2]
     lastday = sys.argv[3]
 
-    DATA = generate_dataframe(argument, today, lastday)
-    write_pickle(DATA, "Stocks/" + argument)
+    generate_dataframe(argument, today, lastday)
+    #write_pickle(DATA, "Stocks/" + argument)
 
 
 if __name__ == "__main__":

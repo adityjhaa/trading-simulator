@@ -27,7 +27,7 @@ int main(int argv, char *argc[])
 
     string command = "";
 
-    // --------------- generate data --------------------------
+    // --------------- generate data -------------------------- //
     if (strategy == "PAIRS")
     {
         command = "python3 main.py " + symbol1 + " " + start_date + " " + end_date;
@@ -41,8 +41,7 @@ int main(int argv, char *argc[])
         system(command.c_str());
     }
 
-
-    // ---------------- case based commands --------------------
+    // ---------------- case based commands ------------------ //
     if (strategy == "BASIC")
     {
         system("g++ basic.cpp -o basic.out");
@@ -97,6 +96,8 @@ int main(int argv, char *argc[])
         command = "./pairs.out ";
         system(command.c_str());
     }
+
+    system("rm -f Stocks/*");
 
     return 0;
 }
