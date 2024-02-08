@@ -18,6 +18,8 @@ def generate_dataframe(symbol, today, lastday):
     df = pd.DataFrame(stock_df(symbol=symbol, from_date=date(to_year, to_month, to_day), to_date=date(la_year, la_month, la_day), series="EQ"))
     df = df[[ "DATE", "CLOSE"]]
     df = df.iloc[::-1]
+    df['DATE'] = pd.to_datetime(df['DATE'], format='%d-%m-%Y')
+    df['DATE'] = df['DATE'].dt.strftime('%d/%m/%Y')
     df.to_csv("Stocks/"+symbol+".csv", index=False)
 
 

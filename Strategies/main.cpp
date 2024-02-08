@@ -97,7 +97,6 @@ int main(int argv, char *argc[])
         system(command.c_str());
     }
 
-    system("rm -f Stocks/*");
 
     return 0;
 }
