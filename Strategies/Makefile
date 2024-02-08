@@ -31,4 +31,5 @@ main.out: main.cpp
 
 clean:
 	@rm -f *.out
-	@rm -f Stocks/*.pkl
+	@rm -f Stocks/*
+
