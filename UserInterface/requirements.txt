@@ -4,3 +4,4 @@ pandas
 pandas-datareader
 plotly
 werkzeug
+yahooquery
