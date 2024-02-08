@@ -32,11 +32,19 @@ int main(int argv, char *argc[])
         string price;
         stringstream ss(line);
         getline(ss, date, ',');
-        getline(ss, price, ',');
+        getline(ss, price, '\n');
         data.push_back({date, stod(price)});
     }
 
     file.close();
+
+    ofstream cash_file("results/daily_cashflow.csv");
+    ofstream order_file("results/order_statistics.csv");
+    ofstream final_file("results/final_pnl.txt");
+
+
+    cash_file << "Date,Cashflow\n";
+    order_file << "Date,Order_dir,Quantity,Price\n";
 
     long unsigned int len{data.size()};
 
@@ -44,6 +52,7 @@ int main(int argv, char *argc[])
     int dec_n{};
     double price{data[0].second};
     int stocks{};
+    double cashflow{};
 
     for (int i = 0; i < len; i++)
     {
@@ -57,6 +66,8 @@ int main(int argv, char *argc[])
             {
                 // buy
                 stocks++;
+                order_file << data[i].first << ",BUY,1," << data[i].second << "\n";
+                cashflow -= data[i].second;
             }
             dec_n = 0;
         }
@@ -70,6 +81,8 @@ int main(int argv, char *argc[])
             {
                 // sell
                 stocks--;
+                order_file << data[i].first << ",SELL,1," << data[i].second << "\n";
+                cashflow += data[i].second;
             }
             inc_n = 0;
         }
@@ -78,7 +91,16 @@ int main(int argv, char *argc[])
             inc_n = dec_n = 0;
         }
         price = data[i].second;
+
+        cash_file << data[i].first << "," << cashflow << "\n";
     }
+
+    double final_pnl{cashflow + (stocks*price)};
+    final_file << final_pnl << "\n";
+
+    cash_file.close();
+    order_file.close();
+    final_file.close();
 
     return 0;
 }
