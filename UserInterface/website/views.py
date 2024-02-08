@@ -1,11 +1,12 @@
 # this file handels the frontend that is the home page
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, request, redirect, url_for, flash
 from flask_login import login_required, current_user
 from datetime import *
 from dateutil.relativedelta import relativedelta
 from jugaad_data.nse import stock_df
 import plotly.graph_objs as go
 import pandas as pd
+import yahooquery as yq
 
 # setting the blueprint
 views = Blueprint('views', __name__)
@@ -16,6 +17,48 @@ PATH = "./website/data/DATA.pkl"
 stock_symbol=[]
 stock_lists=[]
 indicators = []
+
+# ------------------------------------------------------------------------ filter helpers ----------------------------------------------------------------------------------------
+def get_PE(symbol):
+    symbol += ".NS"
+    stock_data = yq.Ticker(symbol)
+    PE = stock_data.summary_detail[symbol]['trailingPE']
+    return PE
+
+def get_MC(symbol):
+    symbol += ".NS"
+    stock_data = yq.Ticker(symbol)
+    MC = stock_data.summary_detail[symbol]['marketCap']
+    return MC
+
+def get_Price(symbol):
+    pass
+
+def get_Volume(symbol):
+    pass
+
+# ------------------------------------------------------------------------ list generators for each filter ----------------------------------------------------------------------------------------
+def list_PE():
+    result = []
+    NIFTY = ["ADANIENT","ADANIPORTS","APOLLOHOSP","ASIANPAINT","AXISBANK","BAJAJ-AUTO","BAJFINANCE","BAJAJFINSV","BPCL","BHARTIARTL","BRITANNIA","CIPLA","DIVISLAB","DRREDDY","EICHERMOT","GRASIM","HCLTECH","HDFCBANK","HEROMOTOCO","HDFCLIFE","HINDALCO","ICICIBANK","ITC","INFY","JSWSTEEL","KOTAKBANK","LT","MARUTI","NTPC","ONGC","POWERGRID","RELIANCE","SBIN","SUNPHARMA","TCS","TATACONSUM","TATAMOTORS", "TECHM","TITAN","ULTRACEMCO","WIPRO"]
+    for symbol in NIFTY:
+        result.append((symbol, get_PE(symbol)))
+    
+    return result
+
+def list_MC():
+    result = []
+    NIFTY = ["ADANIENT","ADANIPORTS","APOLLOHOSP","ASIANPAINT","AXISBANK","BAJAJ-AUTO","BAJFINANCE","BAJAJFINSV","BPCL","BHARTIARTL","BRITANNIA","CIPLA","COALINDIA""DIVISLAB","DRREDDY","EICHERMOT","GRASIM","HCLTECH","HDFCBANK","HEROMOTOCO","HDFCLIFE","HINDALCO","HINDUNILVR","ICICIBANK","ITC","INDUSINDBK","INFY","JSWSTEEL","KOTAKBANK","LTIM""LT","MARUTI","NTPC","NESTLEIND""ONGC","POWERGRID","RELIANCE","SBIN","SUNPHARMA","TCS","TATACONSUM","TATAMOTORS","TATASTEEL", "TECHM","TITAN","UPL","ULTRACEMCO","WIPRO"]
+    for symbol in NIFTY:
+        result.append((symbol, get_MC(symbol)))
+    
+    return result
+
+def list_Price():
+    return []
+
+def list_Volume():
+    return []
 
 # ----------------------------------------------------------------------- trace generator functions for indicators -------------------------------------------------------------------- 
 def generate_macd_trace(df):
@@ -252,4 +295,30 @@ def compare():
 @views.route('/filter', methods = ['GET', 'POST'])
 @login_required
 def filter():
+    if request.method == 'POST':
+        filter = request.form.get('filter')
+        try:
+            number = int(request.form.get('number'))
+        except:
+            flash("Please enter a valid integer", category='error')
+            return render_template("filter.html", user = current_user)            
+        if number <= 0:
+            flash("Enter a valid number", category='error')
+            return render_template("filter.html", user = current_user)
+        else:
+            if filter == 'PE Ratio':
+                list = list_PE()
+                list.sort(key = lambda x: x[1])
+            elif filter == 'Market Cap':
+                list = list_MC()
+                list.sort(key = lambda x: x[1])
+            elif filter == 'Price':
+                list = list_Price()
+                print(list)
+            elif filter == 'Volume':
+                list = list_Volume()
+                print(list)
+            else:
+                flash("Filter Type Not Supported", category='error')
+            return render_template("filter.html", user = current_user)
     return render_template("filter.html", user = current_user)
