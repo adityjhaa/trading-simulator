@@ -51,7 +51,7 @@ int main(int argv, char *argc[])
     else if (strategy == "DMA")
     {
         system("g++ dma.cpp -o dma.out");
-        command = "./dma.out ";
+        command = "./dma.out " + symbol + " " + n + " " + x + " " + p;
         system(command.c_str());
     }
     else if (strategy == "DMA++")
