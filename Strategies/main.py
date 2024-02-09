@@ -15,7 +15,7 @@ def generate_dataframe(symbol, today, lastday):
     la_year = int(lastday[6:10])
     
     df = pd.DataFrame(stock_df(symbol=symbol, from_date=date(to_year, to_month, to_day), to_date=date(la_year, la_month, la_day), series="EQ"))
-    df = df[[ "DATE", "CLOSE"]]
+    df = df[[ "DATE", "CLOSE", "HIGH", "LOW", "PREV. CLOSE", "VWAP", "NO OF TRADES"]]
     df = df.iloc[::-1]
     df['DATE'] = pd.to_datetime(df['DATE'], format='%d-%m-%Y')
     df['DATE'] = df['DATE'].dt.strftime('%d/%m/%Y')

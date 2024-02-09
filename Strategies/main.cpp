@@ -75,7 +75,7 @@ int main(int argv, char *argc[])
     else if (strategy == "ADX")
     {
         system("g++ adx.cpp -o adx.out");
-        command = "./adx.out ";
+        command = "./adx.out " + symbol + " " + x + " " + n + " " + adx_threshold;
         system(command.c_str());
     }
     else if (strategy == "LINEAR_REGRESSION")

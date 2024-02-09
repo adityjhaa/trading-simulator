@@ -10,7 +10,25 @@ using namespace std;
 
 map<tuple<int, int>, double> memo_ewm;
 
-double get_ewm(vector<pair<string, double>> data, int i, int n, double alpha);
+double get_ewm(vector<pair<string, double>> data, int i, int n, double alpha)
+{
+    if (i == 0)
+    {
+        return data[0].second;
+    }
+
+
+    auto key = std::make_tuple(i, n);
+    if (memo_ewm.find(key) != memo_ewm.end())
+    {
+        return memo_ewm[key];
+    }
+    double prev_ewm = get_ewm(data, i - 1, n, alpha);
+    double ewm = (alpha * (data[i].second - prev_ewm)) + prev_ewm;
+
+    memo_ewm[key] = ewm;
+    return ewm;
+}
 
 int main(int argv, char *argc[])
 {
@@ -59,11 +77,11 @@ int main(int argv, char *argc[])
     for (int i = 0; i < len; i++)
     {
         // macd implementations
-        long_ewm = get_ewm(data, i, long_term, (double)2.0 / (1 + long_term));
-        short_ewm = get_ewm(data, i, short_term, (double)2.0 / (1 + short_term));
+        long_ewm = get_ewm(data, i, long_term, (double)2.0/(1+long_term));
+        short_ewm = get_ewm(data, i, short_term, (double)2.0/(1+short_term));
         macd = short_ewm - long_ewm;
         macd_line.push_back({data[i].first, macd});
-        signal = get_ewm(macd_line, i, signal, (double)2.0 / (1 + signal_term));
+        signal = get_ewm(macd_line, i, signal, (double)2.0/(1+signal_term));
 
         // implementing buy and sell
         if ((macd > signal) and stocks < x)
@@ -93,23 +111,4 @@ int main(int argv, char *argc[])
     final_file.close();
 
     return 0;
-}
-
-double get_ewm(vector<pair<string, double>> data, int i, int n, double alpha)
-{
-    if (i == 0)
-    {
-        return data[0].second;
-    }
-
-    auto key{make_tuple(i, n)};
-    if (memo_ewm.find(key) != memo_ewm.end())
-    {
-        return memo_ewm[key];
-    }
-    double prev_ewm{get_ewm(data, i - 1, n, alpha)};
-    double ewm{(alpha * (data[i].second - prev_ewm)) + prev_ewm};
-
-    memo_ewm[key] = ewm;
-    return ewm;
 }

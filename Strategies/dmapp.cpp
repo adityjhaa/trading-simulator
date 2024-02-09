@@ -8,12 +8,86 @@
 #include <string>
 using namespace std;
 
-map<tuple<int, int, int, int>, double> memo_sf;
-map<tuple<int, int, int, int>, double> memo_ama;
+std::map<std::tuple<int, int, int, int>, double> memo_sf;
+std::map<std::tuple<int, int, int, int>, double> memo_ama;
 
-double get_er(vector<pair<string, double>> data, int i, int n0);
-double get_sf(vector<pair<string, double>> data, int i, int n0, int c1, int c2);
-double get_ama(vector<pair<string, double>> data, int i, int n0, int c1, int c2);
+double get_er(vector<pair<string, double>> data, int i, int n0)
+{
+    double curr_price{}, n_prev_price{}, abs_sum{};
+    if (i < n0)
+    {
+        n_prev_price = data[0].second;
+        curr_price = data[i].second;
+        for (int j = 1; j <= i; j++)
+        {
+            abs_sum += abs(data[j].second - data[j - 1].second);
+        }
+    }
+    else
+    {
+        n_prev_price = data[i - n0].second;
+        curr_price = data[i].second;
+        for (int j = i - n0; j <= i; j++)
+        {
+            abs_sum += abs(data[j].second - data[j - 1].second);
+        }
+    }
+
+    double er = abs(curr_price - n_prev_price) / abs_sum;
+
+    return er;
+}
+
+double get_sf(vector<pair<string, double>> data, int i, int n0, int c1, int c2)
+{
+    if (i == 0)
+    {
+        return 0.5;
+    }
+
+    auto key = std::make_tuple(i, n0, c1, c2);
+    if (memo_sf.find(key) != memo_sf.end())
+    {
+        return memo_sf[key];
+    }
+
+    double temp_val = ((2 * get_er(data, i, n0)) / (1 + c2));
+    double numerator = temp_val - 1;
+    double denominator = temp_val + 1;
+    double factor = numerator / denominator;
+
+    double prev_sf = get_sf(data, i - 1, n0, c1, c2);
+
+    double sf = prev_sf + (c1 * (factor - prev_sf));
+
+    memo_sf[key] = sf;
+
+    return sf;
+}
+
+double get_ama(vector<pair<string, double>> data, int i, int n0, int c1, int c2)
+{
+    if (i == 0)
+    {
+        return data[0].second;
+    }
+
+    auto key = std::make_tuple(i, n0, c1, c2);
+    if (memo_ama.find(key) != memo_ama.end())
+    {
+        return memo_ama[key];
+    }
+
+    double sf_val = get_sf(data, i, n0, c1, c2);
+
+    double prev_ama = get_ama(data, i - 1, n0, c1, c2);
+
+    double ama = prev_ama + sf_val * (data[i].second - prev_ama);
+
+    memo_ama[key] = ama;
+
+    return ama;
+}
 
 int main(int argv, char *argc[])
 {
@@ -71,15 +145,16 @@ int main(int argv, char *argc[])
         // data
         ama = get_ama(data, i, n0, c1, c2);
 
+
         // implementing buy and sell
-        if ((data[i].second > ama + (p / 100)) and stocks < x)
+        if ((data[i].second > ama + (p/100)) and stocks < x)
         {
             // buy
             stocks++;
             order_file << data[i].first << ",BUY,1," << data[i].second << "\n";
             cashflow -= data[i].second;
         }
-        else if ((data[i].second < ama - (p / 100)) and stocks > -x)
+        else if ((data[i].second < ama - (p/100)) and stocks > -x)
         {
             // sell
             stocks--;
@@ -127,82 +202,4 @@ int main(int argv, char *argc[])
     final_file.close();
 
     return 0;
-}
-
-double get_er(vector<pair<string, double>> data, int i, int n0)
-{
-    double curr_price{}, n_prev_price{}, abs_sum{};
-    if (i < n0)
-    {
-        n_prev_price = data[0].second;
-        curr_price = data[i].second;
-        for (int j = 1; j <= i; j++)
-        {
-            abs_sum += abs(data[j].second - data[j - 1].second);
-        }
-    }
-    else
-    {
-        n_prev_price = data[i - n0].second;
-        curr_price = data[i].second;
-        for (int j = i - n0; j <= i; j++)
-        {
-            abs_sum += abs(data[j].second - data[j - 1].second);
-        }
-    }
-
-    double er{abs(curr_price - n_prev_price) / abs_sum};
-
-    return er;
-}
-
-double get_sf(vector<pair<string, double>> data, int i, int n0, int c1, int c2)
-{
-    if (i == 0)
-    {
-        return 0.5;
-    }
-
-    auto key{make_tuple(i, n0, c1, c2)};
-    if (memo_sf.find(key) != memo_sf.end())
-    {
-        return memo_sf[key];
-    }
-
-    double temp_val{((2 * get_er(data, i, n0)) / (1 + c2))};
-    double numerator{temp_val - 1};
-    double denominator{temp_val + 1};
-    double factor{numerator / denominator};
-
-    double prev_sf{get_sf(data, i - 1, n0, c1, c2)};
-
-    double sf{prev_sf + (c1 * (factor - prev_sf))};
-
-    memo_sf[key] = sf;
-
-    return sf;
-}
-
-double get_ama(vector<pair<string, double>> data, int i, int n0, int c1, int c2)
-{
-    if (i == 0)
-    {
-        return data[0].second;
-    }
-
-    auto key{make_tuple(i, n0, c1, c2)};
-    if (memo_ama.find(key) != memo_ama.end())
-    {
-        return memo_ama[key];
-    }
-
-    double sf_val{get_sf(data, i, n0, c1, c2)};
-
-    double prev_ama{get_ama(data, i - 1, n0, c1, c2)};
-
-    double ama{prev_ama + sf_val * (data[i].second - prev_ama)};
-
-    memo_ama[key] = ama;
-
-    return ama;
 }
