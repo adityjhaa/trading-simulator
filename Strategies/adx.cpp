@@ -9,17 +9,13 @@
 
 using namespace std;
 
-std::map<std::tuple<int, int>, double> memo_ewm;
+map<tuple<int, int>, double> memo_ewm;
 
 double get_ewm(vector<pair<string, double>> data, int i, int n, double alpha)
 {
-    if (n<0)
+    if (i == 0)
     {
-        n = 0;
-    }
-    if (i == n)
-    {
-        return data[n].second;
+        return data[0].second;
     }
 
 
@@ -104,20 +100,20 @@ int main(int argv, char *argc[])
         dm_m = max(0.0, low - prev_low);
         tr_line.push_back({data[i].first, tr});
 
-        atr = get_ewm(tr_line, i, i-n, (2.0 / (1 + n)));
+        atr = get_ewm(tr_line, i, n, (2.0 / (1 + n)));
 
         // phase 2
         dm_p_line.push_back({data[i].first, (dm_p / atr)});
         dm_m_line.push_back({data[i].first, (dm_m / atr)});
 
-        di_p = get_ewm(dm_p_line, i, i-n, (2.0 / (1 + n)));
-        di_m = get_ewm(dm_m_line, i, i-n, (2.0 / (1 + n)));
+        di_p = get_ewm(dm_p_line, i, n, (2.0 / (1 + n)));
+        di_m = get_ewm(dm_m_line, i, n, (2.0 / (1 + n)));
 
         // phase 3
         dx = ((di_p - di_m) / (di_p + di_m)) * 100;
         dx_line.push_back({data[i].first, dx});
 
-        adx = get_ewm(dx_line, i, i-n, (2.0 / (1 + n)));
+        adx = get_ewm(dx_line, i, n, (2.0 / (1 + n)));
 
         if (adx > adx_threshold and stocks < x)
         {
