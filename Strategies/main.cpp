@@ -57,7 +57,7 @@ int main(int argv, char *argc[])
     else if (strategy == "DMA++")
     {
         system("g++ dmapp.cpp -o dmapp.out");
-        command = "./dmapp.out ";
+        command = "./dmapp.out " + symbol + " " + n + " " + x + " " + p + " " + max_hold_days + " " + c1 + " " + c2;
         system(command.c_str());
     }
     else if (strategy == "MACD")
