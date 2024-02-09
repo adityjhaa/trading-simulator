@@ -69,7 +69,7 @@ int main(int argv, char *argc[])
     else if (strategy == "RSI")
     {
         system("g++ rsi.cpp -o rsi.out");
-        command = "./rsi.out ";
+        command = "./rsi.out " + symbol + " " + x + " " + n + " " + oversold_threshold + " " + overbought_threshold;
         system(command.c_str());
     }
     else if (strategy == "ADX")
