@@ -63,7 +63,7 @@ int main(int argv, char *argc[])
     else if (strategy == "MACD")
     {
         system("g++ macd.cpp -o macd.out");
-        command = "./macd.out ";
+        command = "./macd.out " + symbol + " " + x;
         system(command.c_str());
     }
     else if (strategy == "RSI")
