@@ -46,7 +46,7 @@ int main(int argv, char *argc[])
     order_file << "Date,Order_dir,Quantity,Price\n";
 
     long unsigned int len{data.size()};
-    double sma = 0, sd = 0, variance = 0, sumOfSquares = 0;
+    double sma{}, sd{}, variance{}, sumOfSquares{};
     int stocks{};
     double cashflow{};
 
@@ -88,8 +88,8 @@ int main(int argv, char *argc[])
         cash_file << data[i].first << "," << cashflow << "\n";
     }
 
-    double final_pnl{cashflow + (stocks*data[len].second)};
-    final_file << final_pnl << "\n";
+    double final_pnl{cashflow + (stocks*data[len - 1].second)};
+    final_file << "Final pnl : " << final_pnl << "\n";
 
     cash_file.close();
     order_file.close();

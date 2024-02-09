@@ -96,7 +96,7 @@ int main(int argv, char *argc[])
     }
 
     double final_pnl{cashflow + (stocks*price)};
-    final_file << final_pnl << "\n";
+    final_file << "Final pnl : " << final_pnl << "\n";
 
     cash_file.close();
     order_file.close();
