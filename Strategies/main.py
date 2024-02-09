@@ -1,7 +1,6 @@
 import sys
 from datetime import date
 import pandas as pd
-from datetime import date
 from jugaad_data.nse import stock_df
 
 # ------------------------------------ generation of data frame --------------------------------------------
