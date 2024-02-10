@@ -10,25 +10,7 @@ using namespace std;
 
 map<tuple<int, int>, double> memo_ewm;
 
-double get_ewm(vector<pair<string, double>> data, int i, int n, double alpha)
-{
-    if (i == 0)
-    {
-        return data[0].second;
-    }
-
-
-    auto key = std::make_tuple(i, n);
-    if (memo_ewm.find(key) != memo_ewm.end())
-    {
-        return memo_ewm[key];
-    }
-    double prev_ewm = get_ewm(data, i - 1, n, alpha);
-    double ewm = (alpha * (data[i].second - prev_ewm)) + prev_ewm;
-
-    memo_ewm[key] = ewm;
-    return ewm;
-}
+double get_ewm(vector<pair<string, double>> data, int i, int n, double alpha);
 
 int main(int argv, char *argc[])
 {
@@ -111,4 +93,24 @@ int main(int argv, char *argc[])
     final_file.close();
 
     return 0;
+}
+
+double get_ewm(vector<pair<string, double>> data, int i, int n, double alpha)
+{
+    if (i == 0)
+    {
+        return data[0].second;
+    }
+
+    auto key{make_tuple(i, n)};
+    if (memo_ewm.find(key) != memo_ewm.end())
+    {
+        return memo_ewm[key];
+    }
+
+    double prev_ewm{get_ewm(data, i - 1, n, alpha)};
+    double ewm{(alpha * (data[i].second - prev_ewm)) + prev_ewm};
+
+    memo_ewm[key] = ewm;
+    return ewm;
 }
