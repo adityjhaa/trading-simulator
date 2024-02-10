@@ -81,7 +81,7 @@ int main(int argv, char *argc[])
     else if (strategy == "LINEAR_REGRESSION")
     {
         system("g++ linregr.cpp -o linregr.out");
-        command = "./linregr.out ";
+        command = "./linregr.out " + symbol + " " + x + " " + p + " " + train_start_date + " " + train_end_date;
         system(command.c_str());
     }
     else if (strategy == "BEST_OF_ALL")

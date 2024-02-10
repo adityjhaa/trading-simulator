@@ -1,4 +1,4 @@
-UserInterface/instance/
-UserInterface/website/__pycache__/
+instance/
+website/__pycache__/
 Strategies/Stocks/*
 *.out

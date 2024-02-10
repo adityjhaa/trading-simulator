@@ -34,7 +34,7 @@ int main(int argv, char *argc[])
         string price;
         stringstream ss(line);
         getline(ss, date, ',');
-        getline(ss, price, '\n');
+        getline(ss, price, ',');
         data.push_back({date, stod(price)});
     }
     file.close();
