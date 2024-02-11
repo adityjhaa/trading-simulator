@@ -93,7 +93,7 @@ int main(int argv, char *argc[])
     else if (strategy == "PAIRS")
     {
         system("g++ pairs.cpp -o pairs.out");
-        command = "./pairs.out ";
+        command = "./pairs.out " + symbol1 + " " + symbol2 + " " + x + " " + n + " " + threshold + " " + stop_loss_threshold;
         system(command.c_str());
     }
 
