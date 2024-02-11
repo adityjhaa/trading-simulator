@@ -1,4 +1,5 @@
 instance/
 website/__pycache__/
 Strategies/Stocks/*
+!Strategies/Stocks/deleteme
 *.out
