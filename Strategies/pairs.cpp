@@ -25,8 +25,8 @@ int main(int argv, char *argc[])
     vector<pair<string, double>> data1;
     vector<pair<string, double>> data2;
 
-    ifstream file1("Stocks/" + symbol1 + ".csv");
-    ifstream file2("Stocks/" + symbol2 + ".csv");
+    ifstream file1(symbol1 + ".csv");
+    ifstream file2(symbol2 + ".csv");
 
     if (!file1.is_open() or !file2.is_open())
     {
@@ -60,10 +60,10 @@ int main(int argv, char *argc[])
     file1.close();
     file2.close();
 
-    ofstream cash_file("results/daily_cashflow.csv");
-    ofstream order_file1("results/order_statistics_1.csv");
-    ofstream order_file2("results/order_statistics_2.csv");
-    ofstream final_file("results/final_pnl.txt");
+    ofstream cash_file("daily_cashflow.csv");
+    ofstream order_file1("order_statistics_1.csv");
+    ofstream order_file2("order_statistics_2.csv");
+    ofstream final_file("final_pnl.txt");
     cash_file << "Date,Cashflow\n";
     order_file1 << "Date,Order_dir,Quantity,Price\n";
     order_file2 << "Date,Order_dir,Quantity,Price\n";
@@ -148,7 +148,7 @@ int main(int argv, char *argc[])
     }
 
     double final_pnl{cashflow + (stocks * data1[len - 1].second) - (stocks * data2[len - 1].second)};
-    final_file << "Final pnl : " << final_pnl << "\n";
+    final_file <<final_pnl;
 
     cash_file.close();
     order_file1.close();

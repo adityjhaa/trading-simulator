@@ -20,9 +20,9 @@ def generate_dataframe(symbol, today, lastday, train_data):
     df['DATE'] = pd.to_datetime(df['DATE'], format='%d-%m-%Y')
     df['DATE'] = df['DATE'].dt.strftime('%d/%m/%Y')
     if (train_data == "0"):
-        df.to_csv("Stocks/"+symbol+".csv", index=False)
+        df.to_csv(symbol+".csv", index=False)
     else:
-        df.to_csv("Stocks/"+symbol+"_train.csv", index = False)
+        df.to_csv(symbol+"_train.csv", index = False)
 
 # ----------------------------------------------- pickle --------------------------------------------------------
 def write_pickle(DATA, symbol):

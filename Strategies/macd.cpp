@@ -19,7 +19,7 @@ int main(int argv, char *argc[])
 
     vector<pair<string, double>> data;
 
-    ifstream file("Stocks/" + symbol + ".csv");
+    ifstream file(symbol + ".csv");
     if (!file.is_open())
     {
         cerr << "Error opening file." << endl;
@@ -42,9 +42,9 @@ int main(int argv, char *argc[])
 
     file.close();
 
-    ofstream cash_file("results/daily_cashflow.csv");
-    ofstream order_file("results/order_statistics.csv");
-    ofstream final_file("results/final_pnl.txt");
+    ofstream cash_file("daily_cashflow.csv");
+    ofstream order_file("order_statistics.csv");
+    ofstream final_file("final_pnl.txt");
 
     cash_file << "Date,Cashflow\n";
     order_file << "Date,Order_dir,Quantity,Price\n";
@@ -86,7 +86,7 @@ int main(int argv, char *argc[])
     }
 
     double final_pnl{cashflow + (stocks * data[len - 1].second)};
-    final_file << "Final pnl : " << final_pnl << "\n";
+    final_file << final_pnl;
 
     cash_file.close();
     order_file.close();

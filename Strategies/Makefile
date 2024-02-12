@@ -27,7 +27,8 @@ run: main.out
 	@rm -f *.out
 	@rm -f Stocks/*
 
-
+# data:
+# 	@python3 main.py $(symbol) $(start_date) $(end_date) 0
 
 main.out: main.cpp
 	@g++ main.cpp -o main.out

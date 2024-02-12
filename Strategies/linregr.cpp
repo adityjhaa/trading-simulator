@@ -148,7 +148,7 @@ int main(int argv, char *argc[])
     vector<vector<double>> y_matrix;
 
     // loading train data
-    ifstream file("Stocks/" + symbol + "_train.csv");
+    ifstream file(symbol + "_train.csv");
     if (!file.is_open())
     {
         cerr << "Error opening file." << endl;
@@ -225,9 +225,9 @@ int main(int argv, char *argc[])
     }
     file1.close();
 
-    ofstream cash_file("results/daily_cashflow.csv");
-    ofstream order_file("results/order_statistics.csv");
-    ofstream final_file("results/final_pnl.txt");
+    ofstream cash_file("daily_cashflow.csv");
+    ofstream order_file("order_statistics.csv");
+    ofstream final_file("final_pnl.txt");
 
     cash_file << "Date,Cashflow\n";
     order_file << "Date,Order_dir,Quantity,Price\n";
