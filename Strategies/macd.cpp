@@ -63,7 +63,7 @@ int main(int argv, char *argc[])
         short_ewm = get_ewm(data, i, short_term, (double)2.0/(1+short_term));
         macd = short_ewm - long_ewm;
         macd_line.push_back({data[i].first, macd});
-        signal = get_ewm(macd_line, i, signal, (double)2.0/(1+signal_term));
+        signal = get_ewm(macd_line, i, signal_term, (double)2.0/(1+signal_term));
 
         // implementing buy and sell
         if ((macd > signal) and stocks < x)
@@ -86,7 +86,7 @@ int main(int argv, char *argc[])
     }
 
     double final_pnl{cashflow + (stocks * data[len - 1].second)};
-    final_file << final_pnl;
+    final_file << final_pnl << "\n";
 
     cash_file.close();
     order_file.close();
