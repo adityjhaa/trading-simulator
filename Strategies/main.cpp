@@ -30,14 +30,21 @@ int main(int argv, char *argc[])
     // --------------- generate data -------------------------- //
     if (strategy == "PAIRS")
     {
-        command = "python3 main.py " + symbol1 + " " + start_date + " " + end_date;
+        command = "python3 main.py " + symbol1 + " " + start_date + " " + end_date + " 0";
         system(command.c_str());
-        command = "python3 main.py " + symbol2 + " " + start_date + " " + end_date;
+        command = "python3 main.py " + symbol2 + " " + start_date + " " + end_date + " 0";
+        system(command.c_str());
+    }
+    else if (strategy == "LINEAR_REGRESSION")
+    {
+        command = "python3 main.py " + symbol + " " + train_start_date + " " + train_end_date + " 1";
+        system(command.c_str());
+        command = "python3 main.py " + symbol + " " + start_date + " " + end_date + " 0";
         system(command.c_str());
     }
     else
     {
-        command = "python3 main.py " + symbol + " " + start_date + " " + end_date;
+        command = "python3 main.py " + symbol + " " + start_date + " " + end_date + " 0";
         system(command.c_str());
     }
 
@@ -96,7 +103,6 @@ int main(int argv, char *argc[])
         command = "./pairs.out " + symbol1 + " " + symbol2 + " " + x + " " + n + " " + threshold + " " + stop_loss_threshold;
         system(command.c_str());
     }
-
 
     return 0;
 }
