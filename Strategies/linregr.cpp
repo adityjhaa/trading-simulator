@@ -251,14 +251,14 @@ int main(int argv, char *argc[])
         // prediction
         predicted_close = params[0][0] + params[0][1] * prev_close + params[0][2] * prev_open + params[0][3] * prev_vwap + params[0][4] * prev_low + params[0][5] * prev_high + params[0][6] * prev_noOfTrades + params[0][7] * open;
 
-        if (predicted_close > close + (p / 100))
+        if ((predicted_close > close + (p / 100)) and stocks < x)
         {
             // buy
             stocks++;
             order_file << data[i].first << ",BUY,1," << data[i].second[0] << "\n";
             cashflow -= data[i].second[0];
         }
-        else if (predicted_close < close - (p / 100))
+        else if ((predicted_close < close - (p / 100)) and stocks > -x)
         {
             // sell
             stocks--;
