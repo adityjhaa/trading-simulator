@@ -16,6 +16,12 @@ int main(int argv, char *argc[])
     double overbought_threshold{stod(argc[5])};
 
     vector<pair<string, double>> data;
+    ifstream f("help.txt");
+    string text;
+    getline(f, text);
+    double prev{stod(text)};
+    cout << prev<< endl;
+    f.close();
 
     ifstream file(symbol + ".csv");
     if (!file.is_open())

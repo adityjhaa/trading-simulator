@@ -24,11 +24,8 @@ def generate_dataframe(symbol, today, lastday, train_data):
     else:
         df.to_csv(symbol+"_train.csv", index = False)
 
-# ----------------------------------------------- pickle --------------------------------------------------------
-def write_pickle(DATA, symbol):
-    pd.to_pickle(DATA, symbol + ".pkl")
-
-# -------------------------------------------------------- MAIN -----------------------------------------------------------------------
+# -------
+# ------------------------------------------------- MAIN -----------------------------------------------------------------------
 def main():
     argument = sys.argv[1]
     today = sys.argv[2]
@@ -36,7 +33,6 @@ def main():
     train_data = sys.argv[4]
 
     generate_dataframe(argument, today, lastday, train_data)
-    #write_pickle(DATA, "Stocks/" + argument)
 
 
 if __name__ == "__main__":

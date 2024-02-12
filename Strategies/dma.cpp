@@ -53,7 +53,7 @@ int main(int argv, char *argc[])
     for (int i = 0; i < len; i++)
     {
         // the first n0 days we have no DMA so we can continue
-        int windowSize = min(i + 1, 50);
+        int windowSize = min(i + 1, n0);
         sumOfSquares += (data[i].second * data[i].second);
         sum += (data[i].second);
         if (i >= n0)
