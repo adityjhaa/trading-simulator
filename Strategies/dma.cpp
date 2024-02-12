@@ -15,7 +15,7 @@ int main(int argv, char *argc[])
 
     vector<pair<string, double>> data;
 
-    ifstream file(symbol + ".csv");
+    ifstream file("Stocks/" + symbol + ".csv");
     if (!file.is_open())
     {
         cerr << "Error opening file." << endl;
@@ -38,9 +38,9 @@ int main(int argv, char *argc[])
 
     file.close();
 
-    ofstream cash_file("daily_cashflow.csv");
-    ofstream order_file("order_statistics.csv");
-    ofstream final_file("final_pnl.txt");
+    ofstream cash_file("results/daily_cashflow.csv");
+    ofstream order_file("results/order_statistics.csv");
+    ofstream final_file("results/final_pnl.txt");
 
     cash_file << "Date,Cashflow\n";
     order_file << "Date,Order_dir,Quantity,Price\n";
@@ -53,14 +53,16 @@ int main(int argv, char *argc[])
     for (int i = 0; i < len; i++)
     {
         // the first n0 days we have no DMA so we can continue
-        if (i < n0)
+        int windowSize = min(i + 1, 50);
+        sumOfSquares += (data[i].second * data[i].second);
+        sum += (data[i].second);
+        if (i >= n0)
         {
-            sum += (data[i].second);
-            sma = sum / (i + 1);
-            sumOfSquares += (data[i].second * data[i].second);
-            variance = sumOfSquares / (i + 1) - (sma * sma);
-            // continue;
+            sum -= data[i-n0].second;
+            sumOfSquares -= data[i-n0].second*data[i-n0].second;
         }
+        sma = sum / windowSize;
+        variance = (sumOfSquares - (sum * sum) / windowSize) / (windowSize - 1);
 
         // getting the first value of sma and sd
         sd = sqrt(variance);
@@ -81,20 +83,12 @@ int main(int argv, char *argc[])
             cashflow += data[i].second;
         }
 
-        // update sma and sd
-        if (i >= n0)
-        {
-            sum = sum + ((data[i].second - data[i - n0].second));
-            sma = sum / n0;
-            sumOfSquares = sumOfSquares + (((data[i].second * data[i].second) - (data[i - n0].second * data[i - n0].second)));
-            variance = sumOfSquares / n0 - (sma * sma);
-        }
         // cash_file
         cash_file << data[i].first << "," << cashflow << "\n";
     }
 
     double final_pnl{cashflow + (stocks * data[len - 1].second)};
-    final_file << final_pnl;
+    final_file << "Final pnl : " << final_pnl << "\n";
 
     cash_file.close();
     order_file.close();
