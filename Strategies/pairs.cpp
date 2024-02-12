@@ -54,7 +54,7 @@ int main(int argv, char *argc[])
         stringstream ss(line2);
         getline(ss, date, ',');
         getline(ss, price, ',');
-        data1.push_back({date, stod(price)});
+        data2.push_back({date, stod(price)});
     }
 
     file1.close();
@@ -71,17 +71,88 @@ int main(int argv, char *argc[])
     long unsigned int len{data1.size()};
     int stocks{};
     double cashflow{};
+    double sum{};
+    double sumOfSquares{};
     double roll_mean{};
-    vector<double> spread;
+    double sd{};
+    double z_score{};
+    double variance{};
+    double spread;
 
     for (int i = 0; i < len; i++)
     {
-        spread.push_back(data1[i].second - data2[i].second);
+        spread = (data1[i].second - data2[i].second);
         if (i < n0)
         {
-            roll_mean += spread[i];
+            sum += spread;
+            roll_mean = sum / (i + 1);
+            sumOfSquares += spread * spread;
+            variance = sumOfSquares / (i + 1) - (roll_mean * roll_mean);
         }
+        sd = sqrt(variance);
+
+        z_score = (spread - roll_mean) / sd;
+
+        if (z_score > threshold and stocks > -x)
+        {
+            // sell
+            stocks--;
+            order_file1 << data1[i].first << ",SELL,1," << data1[i].second << "\n";
+            order_file2 << data2[i].first << ",BUY,1," << data2[i].second << "\n";
+            cashflow += data1[i].second;
+            cashflow -= data2[i].second;
+        }
+        else if (z_score < -threshold and stocks < x)
+        {
+            // buy
+            stocks++;
+            order_file1 << data1[i].first << ",BUY,1," << data1[i].second << "\n";
+            order_file2 << data2[i].first << ",SELL,1," << data2[i].second << "\n";
+            cashflow -= data1[i].second;
+            cashflow += data2[i].second;
+        }
+
+        // stop loss impllementation
+        if (is_stop_loss == true)
+        {
+            if (z_score > stop_loss_threshold and stocks > -x)
+            {
+                // sell
+                stocks--;
+                order_file1 << data1[i].first << ",SELL,1," << data1[i].second << "\n";
+                order_file2 << data2[i].first << ",BUY,1," << data2[i].second << "\n";
+                cashflow += data1[i].second;
+                cashflow -= data2[i].second;
+            }
+            else if (z_score < -stop_loss_threshold and stocks < x)
+            {
+                // buy
+                stocks++;
+                order_file1 << data1[i].first << ",BUY,1," << data1[i].second << "\n";
+                order_file2 << data2[i].first << ",SELL,1," << data2[i].second << "\n";
+                cashflow -= data1[i].second;
+                cashflow += data2[i].second;
+            }
+        }
+
+        if (i >= n0)
+        {
+            double past_spread = data1[i - n0].second - data2[i - n0].second;
+            sum += (spread) - (past_spread);
+            roll_mean = sum / n0;
+            sumOfSquares += (spread * spread) - (past_spread * past_spread);
+            variance = sumOfSquares / n0 - (roll_mean * roll_mean);
+        }
+        // cash_file
+        cash_file << data1[i].first << "," << cashflow << "\n";
     }
 
+    double final_pnl{cashflow + (stocks * data1[len - 1].second) - (stocks * data2[len - 1].second)};
+    final_file << "Final pnl : " << final_pnl << "\n";
+
+    cash_file.close();
+    order_file1.close();
+    order_file2.close();
+    final_file.close();
     return 0;
 }
