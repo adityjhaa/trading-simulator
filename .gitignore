@@ -1,3 +1,6 @@
 instance/
 website/__pycache__/
 *.out
+*.csv
+*.txt
+*.ipynb

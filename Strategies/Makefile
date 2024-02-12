@@ -23,12 +23,8 @@ stop_loss_threshold := 0
 
 run: main.out
 	@./main.out $(strategy) $(symbol) $(n) $(x) $(start_date) $(end_date) $(p) $(max_hold_days) $(c1) $(c2) $(oversold_threshold) $(overbought_threshold) $(adx_threshold) $(train_start_date) $(train_end_date) $(symbol1) $(symbol2) $(threshold) $(stop_loss_threshold)
-#clean
 	@rm -f *.out
 	@rm -f Stocks/*
-
-# data:
-# 	@python3 main.py $(symbol) $(start_date) $(end_date) 0
 
 main.out: main.cpp
 	@g++ main.cpp -o main.out
