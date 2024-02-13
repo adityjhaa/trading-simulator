@@ -1,5 +1,6 @@
 instance/
 website/__pycache__/
+website/data/DATA.pkl
 *.out
 *.csv
 *.txt

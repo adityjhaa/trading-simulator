@@ -121,11 +121,11 @@ def generate_s50_trace(df):
     s50_trace = go.Scatter(x = df['DATE'], y = df['SMA50'], mode = 'lines', name='SMA50 line')
     return s50_trace
 
-def generate_s100_trace(df):
-    sma_window = 100
-    df['SMA100'] = df['CLOSE'].rolling(window=sma_window, min_periods=1).mean()
+def generate_s200_trace(df):
+    sma_window = 200
+    df['SMA200'] = df['CLOSE'].rolling(window=sma_window, min_periods=1).mean()
 
-    s100_trace = go.Scatter(x = df['DATE'], y = df['SMA100'], mode = 'lines', name='SMA100 line')
+    s100_trace = go.Scatter(x = df['DATE'], y = df['SMA200'], mode = 'lines', name='SMA200 line')
     return s100_trace
 
 # -------------------------------------------------------------------------------- trace generator function for candlestick graph ------------------------------------------------------------
@@ -162,8 +162,8 @@ def generate_candlestick_chart(PATH, symbol, button, indicators = ""):
     if 's50' in indicators:
         s50_trace = generate_s50_trace(df)
         trace_list.append(s50_trace)
-    if 's100' in indicators:
-        s100_trace = generate_s100_trace(df)
+    if 's200' in indicators:
+        s100_trace = generate_s200_trace(df)
         trace_list.append(s100_trace)
 
     layout = go.Layout(title=symbol, xaxis=dict(title='Date'), yaxis=dict(title='Price'),height=800,dragmode='pan')
@@ -252,7 +252,7 @@ def graph():
         button_MACD = request.form.get('MACD')
         button_RSI = request.form.get('RSI')
         button_SMA_50 = request.form.get('SMA-50')
-        button_SMA_100 = request.form.get('SMA-100')
+        button_SMA_100 = request.form.get('SMA-200')
         if button_MACD and 'm' not in indicators:
             indicators.append('m')
         elif button_MACD and 'm' in indicators:
@@ -265,10 +265,10 @@ def graph():
             indicators.append('s50')
         elif button_SMA_50 and 's50' in indicators:
             indicators.remove('s50')
-        if button_SMA_100 and 's100' not in indicators:
-            indicators.append('s100')
-        elif button_SMA_100 and 's100' in indicators:
-            indicators.remove('s100')
+        if button_SMA_100 and 's200' not in indicators:
+            indicators.append('s200')
+        elif button_SMA_100 and 's200' in indicators:
+            indicators.remove('s200')
         if request.form.get('clear'):
             indicators.clear()
         
