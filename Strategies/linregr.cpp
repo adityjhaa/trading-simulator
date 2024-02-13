@@ -197,7 +197,7 @@ int main(int argv, char *argc[])
 
     // finally getting to the byuing and selling part
     // loading test data
-    ifstream file1("Stocks/" + symbol + ".csv");
+    ifstream file1(symbol + ".csv");
     if (!file1.is_open())
     {
         cerr << "Error opening file." << endl;
