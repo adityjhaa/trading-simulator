@@ -3,29 +3,25 @@
 #include <fstream>
 #include <vector>
 #include <string>
-#include <tuple>
 #include <map>
 #include <cmath>
 
 using namespace std;
 
-map<tuple<int, int>, double> memo_ewm;
-
-double get_ewm(vector<pair<string, double>> data, int i, int n, double alpha)
+double get_ewm(vector<pair<string, double>> data, int i, int n, double alpha, string indicator, map<pair<int, string>, double> memo_ewm)
 {
     if (i == 0)
     {
-        return data[0].second;
+        return data[i].second;
     }
-
-
-    auto key = make_tuple(i, n);
+    pair<int, string> key = {i, indicator};
     if (memo_ewm.find(key) != memo_ewm.end())
     {
         return memo_ewm[key];
     }
-    double prev_ewm = get_ewm(data, i - 1, n, alpha);
-    double ewm = (alpha * (data[i].second - prev_ewm)) + prev_ewm;
+
+    double prev_ewm{get_ewm(data, i - 1, n, alpha, indicator, memo_ewm)};
+    double ewm{(alpha * (data[i].second - prev_ewm)) + prev_ewm};
 
     memo_ewm[key] = ewm;
     return ewm;
@@ -80,6 +76,7 @@ int main(int argv, char *argc[])
     double close{}, high{}, prev_high{}, low{}, prev_low{}, prevClose{};
     double tr{}, dm_p{}, dm_m{}, atr{}, di_p{}, di_m{}, dx{}, adx{};
     vector<pair<string, double>> tr_line, dm_p_line, dm_m_line, dx_line;
+    map<pair<int, string>, double> memo{};
     int stocks{};
     double cashflow{};
 
@@ -100,20 +97,19 @@ int main(int argv, char *argc[])
         dm_m = max(0.0, prev_low - low);
         tr_line.push_back({data[i].first, tr});
 
-        atr = get_ewm(tr_line, i, n, (2.0 / (1 + n)));
-
+        atr = get_ewm(tr_line, i, n, (double)2.0 / (1 + n), "atr", memo);
         // phase 2
-        dm_p_line.push_back({data[i].first, (dm_p/atr)});
-        dm_m_line.push_back({data[i].first, (dm_m/atr)});
+        dm_p_line.push_back({data[i].first, (dm_p / atr)});
+        dm_m_line.push_back({data[i].first, (dm_m / atr)});
 
-        di_p = get_ewm(dm_p_line, i, n, (2.0 / (1 + n)));
-        di_m = get_ewm(dm_m_line, i, n, (2.0 / (1 + n)));
+        di_p = get_ewm(dm_p_line, i, n, (2.0 / (1 + n)), "di+", memo);
+        di_m = get_ewm(dm_m_line, i, n, (2.0 / (1 + n)), "di-", memo);
 
         // phase 3
         dx = ((di_p - di_m) / (di_p + di_m)) * 100;
         dx_line.push_back({data[i].first, dx});
 
-        adx = get_ewm(dx_line, i, n, (2.0 / (1 + n)));
+        adx = get_ewm(dx_line, i, n, (2.0 / (1 + n)), "adx", memo);
         if (adx > adx_threshold and stocks < x)
         {
             stocks++;
@@ -131,7 +127,7 @@ int main(int argv, char *argc[])
     }
 
     double final_pnl{cashflow + (stocks * data[len - 1].second[0])};
-    final_file << final_pnl ;
+    final_file << final_pnl;
 
     cash_file.close();
     order_file.close();
