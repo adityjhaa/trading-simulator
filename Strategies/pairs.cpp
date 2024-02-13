@@ -82,12 +82,13 @@ int main(int argv, char *argc[])
     for (int i = 0; i < len; i++)
     {
         spread = (data1[i].second - data2[i].second);
-        if (i < n0)
+        int windowSize = min(i + 1, n0);
+        sumOfSquares += spread*spread;
+        sum += spread;
+        if (i >= n0)
         {
-            sum += spread;
-            roll_mean = sum / (i + 1);
-            sumOfSquares += spread * spread;
-            variance = sumOfSquares / (i + 1) - (roll_mean * roll_mean);
+            sum -= (data1[i - n0].second - data2[i - n0].second);
+            sumOfSquares -= ((data1[i - n0].second - data2[i - n0].second) * (data1[i - n0].second - data2[i - n0].second));
         }
         sd = sqrt(variance);
 
@@ -133,15 +134,6 @@ int main(int argv, char *argc[])
                 cashflow -= data1[i].second;
                 cashflow += data2[i].second;
             }
-        }
-
-        if (i >= n0)
-        {
-            double past_spread = data1[i - n0].second - data2[i - n0].second;
-            sum += (spread) - (past_spread);
-            roll_mean = sum / n0;
-            sumOfSquares += (spread * spread) - (past_spread * past_spread);
-            variance = sumOfSquares / n0 - (roll_mean * roll_mean);
         }
         // cash_file
         cash_file << data1[i].first << "," << cashflow << "\n";
