@@ -98,11 +98,15 @@ int main(int argv, char *argc[])
         double symbol_pnl = stod(outcome.substr(11));
         strategies[i].second = symbol_pnl;
     }
-
-    for (int i = 0; i < strategies.size(); i++)
+    
+    int index{};
+    for (int i = 1; i < strategies.size(); i++)
     {
-        cout << strategies[i].first << " " << strategies[i].second << endl;
+        if (strategies[i].second > strategies[i - 1].second)
+            index = i;
     }
+
+    generate_data(strategies[index].first, symbol, start_date, end_date, x, train_start_date, train_end_date);
 
     return 0;
 }
