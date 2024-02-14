@@ -90,6 +90,8 @@ int main(int argv, char *argc[])
             sum -= (data1[i - n0].second - data2[i - n0].second);
             sumOfSquares -= ((data1[i - n0].second - data2[i - n0].second) * (data1[i - n0].second - data2[i - n0].second));
         }
+        roll_mean = sum/windowSize;
+        variance = (sumOfSquares - (sum * sum) / windowSize) / (windowSize - 1);
         sd = sqrt(variance);
 
         z_score = (spread - roll_mean) / sd;
