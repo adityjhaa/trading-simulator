@@ -106,13 +106,13 @@ int main(int argv, char *argc[])
             sum -= (data1[i - n0].second - data2[i - n0].second);
             sumOfSquares -= ((data1[i - n0].second - data2[i - n0].second) * (data1[i - n0].second - data2[i - n0].second));
         }
-        else if (i < n0)
+        else
         {
             sum -= spread_n[i];
             sumOfSquares -= (spread_n[i] * spread_n[i]);
         }
         roll_mean = sum / windowSize;
-        variance = (sumOfSquares - (sum * sum) / windowSize) / (windowSize - 1);
+        variance = (sumOfSquares - (sum * sum) / windowSize) / (windowSize);
         sd = sqrt(variance);
 
         z_score = (spread - roll_mean) / sd;
