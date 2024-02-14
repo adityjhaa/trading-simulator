@@ -159,7 +159,7 @@ int main(int argv, char *argc[])
             }
         }
         // cash_file
-        cash_file << data1[i].first << "," << cashflow << "\n";
+        cash_file << data1[i].first << "," << fixed << setprecision(2) << cashflow << "\n";
     }
 
     double final_pnl{cashflow + (stocks * data1[len - 1].second) - (stocks * data2[len - 1].second)};
