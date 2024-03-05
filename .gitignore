@@ -5,3 +5,4 @@ website/data/DATA.pkl
 *.csv
 *.txt
 *.ipynb
+*.env
