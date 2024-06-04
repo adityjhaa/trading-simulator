@@ -6,14 +6,15 @@ import os
 
 def configure():
     load_dotenv()
+    return os.getenv('API_KEY') or 'dev'
 
 db = SQLAlchemy()
 DB_NAME = "database.db"
 
 def create_app():
-    configure()
+    api_key = configure()
     app = Flask(__name__)
-    app.config['SECRET_KEY'] = os.getenv('api_key')
+    app.config['SECRET_KEY'] = api_key
     app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     db.init_app(app)
