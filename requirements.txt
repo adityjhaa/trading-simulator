@@ -1,5 +1,6 @@
 flask
 flask-login
+flask-sqlalchemy
 pandas
 pandas-datareader
 plotly
