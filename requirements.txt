@@ -6,3 +6,4 @@ pandas-datareader
 plotly
 werkzeug
 yahooquery
+python-dotenv
